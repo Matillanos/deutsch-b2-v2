@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projekt B2 — Deutsch</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:1.5rem}
+#app{width:100%;max-width:660px;padding:0}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.nav-title{font-size:18px;font-weight:600;color:#1a1a1a;letter-spacing:-.02em}
+.nav-sub{font-size:11px;color:#888;margin-top:2px}
+.nav-btns{display:flex;gap:6px}
+.nb{padding:5px 13px;font-size:12px;border:1px solid #ddd;border-radius:8px;background:none;cursor:pointer;color:#666;font-family:inherit;transition:all .15s}
+.nb:hover{border-color:#aaa;color:#333}
+.nb.on{color:#3C3489;border-color:#3C3489;font-weight:500;background:#f0effe}
+.sc{display:none}.sc.on{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.scard{background:#fff;border-radius:10px;padding:.85rem;border:1px solid #e8e8e8}
+.scard.g{background:#EAF3DE;border-color:#C0DD97}
+.scard.r{background:#FCEBEB;border-color:#F7C1C1}
+.sl{font-size:11px;color:#888;margin-bottom:3px}
+.scard.g .sl{color:#3B6D11}.scard.r .sl{color:#A32D2D}
+.sv{font-size:24px;font-weight:600;color:#1a1a1a}
+.scard.g .sv{color:#27500A}.scard.r .sv{color:#791F1F}
+.sn{font-size:10px;color:#999;margin-top:2px}
+.scard.g .sn{color:#3B6D11}.scard.r .sn{color:#A32D2D}
+.card{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1.25rem;margin-bottom:.85rem}
+.bigcard{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;text-align:center;gap:10px;cursor:pointer;transition:border-color .15s}
+.bigcard:hover{border-color:#bbb}
+.bdg{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;font-weight:500}
+.bw{font-size:30px;font-weight:600;color:#1a1a1a;letter-spacing:-.02em}
+.gr{font-size:12px;color:#888;font-style:italic}
+.tap{font-size:12px;color:#bbb;margin-top:6px}
+.tr{font-size:20px;font-weight:600;color:#3C3489;margin-bottom:8px}
+.ac{font-size:12px;color:#666;background:#f5f4f0;border-radius:8px;padding:8px 10px;margin-bottom:8px;line-height:1.5}
+.ex{font-size:12px;color:#888;margin-bottom:3px}
+.row{display:flex;gap:8px;margin-bottom:.85rem}
+.btn{padding:9px 18px;font-size:13px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;flex:1;font-weight:500;transition:opacity .1s}
+.btn:hover{opacity:.85}
+.btn.g{background:#EAF3DE;color:#27500A}
+.btn.r{background:#FCEBEB;color:#791F1F}
+.btn.p{background:#3C3489;color:white}
+.btn.o{background:none;border:1px solid #ddd;color:#333;flex:none;font-weight:400}
+.btn.o:hover{border-color:#aaa}
+.trow{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.dot{width:9px;height:9px;border-radius:50%;background:#E24B4A;transition:opacity .3s,background .3s}
+.tmr{font-size:15px;font-weight:600;color:#1a1a1a;font-variant-numeric:tabular-nums}
+.pb{background:#e8e8e8;border-radius:20px;height:5px;margin-bottom:1.25rem;overflow:hidden}
+.pbf{height:100%;background:#534AB7;border-radius:20px;transition:width .4s}
+.gl{font-size:11px;color:#888;margin-bottom:6px}
+.ges{font-size:18px;font-weight:600;color:#1a1a1a;line-height:1.4}
+.de-label{font-size:11px;color:#888;margin-bottom:5px}
+.de-keys{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.de-key{padding:6px 12px;font-size:15px;border:1px solid #ddd;border-radius:7px;background:#f5f4f0;cursor:pointer;color:#333;font-family:inherit;user-select:none;transition:all .1s}
+.de-key:hover{border-color:#3C3489;color:#3C3489;background:#f0effe}
+.de-key:active{transform:scale(.95)}
+textarea{width:100%;padding:10px;font-size:14px;border:1px solid #ddd;border-radius:8px;background:#fafafa;color:#1a1a1a;font-family:inherit;min-height:70px;resize:vertical;margin-bottom:4px;transition:border-color .15s}
+textarea:focus{outline:none;border-color:#3C3489}
+.pills{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:1rem}
+.pill{font-size:12px;padding:3px 10px;border-radius:20px;font-weight:500}
+.wli{display:flex;align-items:center;gap:8px;padding:7px 10px;background:#fff;border:1px solid #e8e8e8;border-radius:8px;margin-bottom:5px}
+.wn{font-size:13px;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a1a1a}
+.ws{font-size:11px;color:#888;white-space:nowrap}
+.wp{font-size:10px;padding:1px 7px;border-radius:20px;white-space:nowrap;font-weight:500}
+.mb{width:44px;background:#e8e8e8;border-radius:20px;height:4px;overflow:hidden;flex-shrink:0}
+.mbf{height:100%;border-radius:20px}
+.sr{display:flex;gap:10px;align-items:center;padding:7px 10px;background:#f5f4f0;border-radius:8px;margin-bottom:5px;font-size:12px;color:#333}
+.sec-t{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;margin-top:1rem}
+.done{text-align:center;padding:1rem 0}
+.done-t{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:6px}
+.done-s{font-size:14px;color:#888;margin-bottom:1rem}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.fc{border-radius:10px;padding:1rem;text-align:center}
+.fc.g{background:#EAF3DE}.fc.r{background:#FCEBEB}
+.fl{font-size:11px;margin-bottom:4px}
+.fc.g .fl{color:#3B6D11}.fc.r .fl{color:#A32D2D}
+.fv{font-size:26px;font-weight:600}
+.fc.g .fv{color:#27500A}.fc.r .fv{color:#791F1F}
+.saved-flash{font-size:11px;color:#639922;margin-bottom:8px;opacity:0;transition:opacity .2s}
+.saved-flash.show{opacity:1}
+.frases-preview{background:#f5f4f0;border-radius:10px;padding:12px;margin-bottom:1rem;text-align:left}
+.frase-row{font-size:12px;color:#666;padding:4px 0;border-bottom:1px solid #e8e8e8}
+.frase-row:last-child{border-bottom:none}
+.frase-word{font-weight:600;color:#1a1a1a}
+.new-sess-box{background:#f0effe;border:1px solid #AFA9EC;border-radius:10px;padding:1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.new-sess-txt{font-size:13px;color:#3C3489;line-height:1.4}
+.new-sess-btn{padding:7px 16px;font-size:12px;background:#3C3489;color:white;border:none;border-radius:8px;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;font-weight:500}
+/* Shuffle button */
+.shuffle-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.shuffle-btn{padding:6px 14px;font-size:12px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;font-family:inherit;color:#555;display:flex;align-items:center;gap:5px;transition:all .15s}
+.shuffle-btn:hover{border-color:#3C3489;color:#3C3489;background:#f0effe}
+.shuffle-icon{font-size:14px;display:inline-block;transition:transform .3s}
+.shuffle-btn:hover .shuffle-icon{transform:rotate(180deg)}
+.shuffle-info{font-size:11px;color:#888}
+/* word count badge */
+.wcount{font-size:11px;color:#888;margin-left:auto}
+.tfilter-btn{padding:6px 14px;font-size:12px;border:1px solid #ddd;border-radius:20px;background:#fff;cursor:pointer;color:#666;font-family:inherit;transition:all .15s;font-weight:400}
+.tfilter-btn:hover{border-color:#3C3489;color:#3C3489}
+.tfilter-btn.on{background:#3C3489;color:white;border-color:#3C3489;font-weight:500}
+@keyframes ld{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+/* Repaso rápido del día anterior */
+.rq-card{background:#fff;border:2px solid #e8e8e8;border-radius:16px;padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:border-color .15s,transform .1s;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:.85rem}
+.rq-card:hover{border-color:#bbb;transform:translateY(-1px)}
+.rq-card.revealed{cursor:default;border-color:#3C3489}
+.rq-word{font-size:34px;font-weight:700;color:#1a1a1a;letter-spacing:-.02em}
+.rq-trans{font-size:20px;font-weight:600;color:#3C3489;margin-bottom:4px}
+.rq-gram{font-size:12px;color:#888;font-style:italic}
+.rq-acl{font-size:12px;color:#555;background:#f5f4f0;border-radius:8px;padding:8px 12px;line-height:1.5;text-align:left;width:100%}
+.rq-prog{font-size:12px;color:#888;text-align:center;margin-bottom:8px}
+.rq-dots{display:flex;gap:8px;justify-content:center;margin-bottom:1rem;align-items:center;height:12px}
+.rq-dot{width:8px;height:8px;border-radius:50%;background:#e8e8e8;flex-shrink:0;display:inline-block}
+.rq-dot.curr{background:#3C3489}
+.rq-dot.ok{background:#639922}
+.rq-dot.fail{background:#E24B4A}
+/* Caja repetir las palabras del día en t-start */
+.repeat-today-box{background:#fff8e1;border:1px solid #f0d060;border-radius:10px;padding:.85rem 1rem;margin-bottom:.85rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.repeat-today-txt{font-size:13px;color:#6b4e00;line-height:1.4}
+.repeat-today-btn{padding:7px 14px;font-size:12px;background:#f5c842;color:#4a3600;border:none;border-radius:8px;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;font-weight:600;transition:opacity .15s}
+.repeat-today-btn:hover{opacity:.85}
+/* Panel dominio SRS */
+.srs-panel{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1.25rem}
+.srs-col{border-radius:8px;padding:6px 4px;text-align:center;cursor:default}
+.srs-col-n{font-size:18px;font-weight:700;line-height:1}
+.srs-col-l{font-size:9px;margin-top:3px;opacity:.8;line-height:1.2}
+.srs-col-bar{height:3px;border-radius:2px;margin-top:5px;opacity:.5}
+/* Etiqueta nivel en flashcard */
+.card-srs-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;margin-bottom:8px}
+/* Sesión SRS */
+.srs-sess-box{background:#EAF3DE;border:1px solid #b8dda0;border-radius:10px;padding:.85rem 1rem;margin-bottom:.85rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.srs-sess-txt{font-size:13px;color:#1a4a05;line-height:1.4}
+.srs-sess-btn{padding:7px 14px;font-size:12px;background:#639922;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;font-weight:600;transition:opacity .15s}
+.srs-sess-btn:hover{opacity:.85}
+/* Repaso voluntario */
+.vol-box{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem}
+.vol-title{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:10px}
+.vol-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.vol-btn{padding:6px 12px;font-size:12px;border:1.5px solid #e8e8e8;border-radius:20px;cursor:pointer;background:#fff;color:#666;font-family:inherit;font-weight:500;transition:all .15s}
+.vol-btn.on{border-color:#3C3489;background:#f0effe;color:#3C3489;font-weight:600}
+.vol-count{font-size:11px;color:#888;margin-bottom:10px}
+.vol-start{width:100%;padding:10px;background:#3C3489;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.vol-start:hover{opacity:.85}
+.vol-start:disabled{opacity:.4;cursor:default}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="nav">
+  <div>
+    <div class="nav-title">Projekt B2 — Deutsch</div>
+    <div class="nav-sub" id="nav-date"></div>
+  </div>
+  <div class="nav-btns">
+    <button class="nb on" onclick="go('dash')">Dashboard</button>
+    <button class="nb" onclick="go('train')">Entrenar</button>
+    <button class="nb" onclick="go('recap')">Repaso</button>
+    <button class="nb" onclick="go('words')" style="background:#3C3489;color:white;border-color:#3C3489">+ Palabras</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="sc-dash" class="sc on">
+  <!-- Racha diaria -->
+  <div style="background:linear-gradient(135deg,#3C3489,#534AB7);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-size:11px;color:rgba(255,255,255,.7);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Racha actual</div>
+      <div style="font-size:28px;font-weight:600;color:#fff"><span id="d-streak">0</span> días 🔥</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px" id="d-streak-sub">Empieza tu racha entrenando hoy</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:11px;color:rgba(255,255,255,.7);margin-bottom:2px">Mejor racha</div>
+      <div style="font-size:18px;font-weight:600;color:rgba(255,255,255,.9)"><span id="d-best-streak">0</span> días</div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="scard"><div class="sl">Total palabras</div><div class="sv" id="d-tot">0</div></div>
+    <div class="scard"><div class="sl">Días entrenados</div><div class="sv" id="d-days">0</div></div>
+    <div class="scard g"><div class="sl">Nivel maestro</div><div class="sv" id="d-ok">0</div><div class="sn">30d+ en repaso espaciado</div></div>
+    <div class="scard r"><div class="sl">Vencen hoy</div><div class="sv" id="d-due">0</div><div class="sn">pendientes de repaso</div></div>
+  </div>
+  <!-- Panel dominio SRS -->
+  <div style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="font-size:13px;font-weight:600;color:#1a1a1a">📊 Estado de dominio</div>
+      <div style="font-size:11px;color:#888" id="srs-summary"></div>
+    </div>
+    <div class="srs-panel" id="srs-panel"></div>
+    <!-- Botón sesión SRS si hay palabras que vencen -->
+    <div class="srs-sess-box" id="srs-sess-box" style="display:none">
+      <div class="srs-sess-txt">🎯 <strong>Repaso SRS</strong> — tienes <span id="srs-due-count">0</span> palabras pendientes según tu repaso espaciado</div>
+      <button class="srs-sess-btn" onclick="startSRSSession()">Repasar</button>
+    </div>
+  </div>
+
+  <!-- Repaso voluntario por nivel -->
+  <div class="vol-box">
+    <div class="vol-title">🔁 Repasar las que ya conozco</div>
+    <div class="vol-filters" id="vol-filters">
+      <button class="vol-btn on" data-lvl="all" onclick="volFilter('all')">Todas vistas</button>
+      <button class="vol-btn" data-lvl="25" onclick="volFilter('25')">En progreso <span id="vol-n-25"></span></button>
+      <button class="vol-btn" data-lvl="6" onclick="volFilter('6')">⭐ Maestras <span id="vol-n-6"></span></button>
+    </div>
+    <div class="vol-count" id="vol-count"></div>
+    <button class="vol-start" id="vol-start-btn" onclick="startVolReview()">Iniciar repaso — 5 flashcards</button>
+  </div>
+  <!-- Repaso rápido del día anterior -->
+  <div id="rq-section" style="display:none;margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="font-size:13px;font-weight:600;color:#1a1a1a">⚡ Repaso rápido — palabras de ayer</div>
+      <span style="font-size:11px;color:#888" id="rq-count-label"></span>
+    </div>
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1rem">
+      <div style="font-size:12px;color:#666;margin-bottom:12px;line-height:1.5">Las palabras que estudiaste ayer. Toca cada una para ver si las recuerdas — sin escritura, solo para que no se pierdan.</div>
+      <div id="rq-mini-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
+      <button class="btn p" style="width:100%;flex:none" onclick="startQuickReview()">Iniciar repaso rápido</button>
+    </div>
+  </div>
+
+  <!-- Título repaso voluntario activo -->
+  <div id="vol-active-title" style="display:none;font-size:13px;font-weight:600;color:#3C3489;margin-bottom:8px">🔁 Repaso voluntario en curso</div>
+
+  <!-- Pantalla de repaso rápido activa -->
+  <div id="rq-active" style="display:none;margin-bottom:1.25rem">
+    <div class="rq-prog" id="rq-prog">1 / 5</div>
+    <div class="rq-dots" id="rq-dots"></div>
+    <div class="rq-card" id="rq-card" onclick="rqReveal()">
+      <div class="bdg" id="rq-bdg" style="min-width:40px;text-align:center"></div>
+      <div class="rq-word" id="rq-word"></div>
+      <div class="tap" id="rq-tap">toca para ver la traducción</div>
+    </div>
+    <div id="rq-back" style="display:none">
+      <div class="card" style="margin-bottom:.85rem">
+        <div class="rq-trans" id="rq-trans"></div>
+        <div class="rq-gram" id="rq-gram"></div>
+        <div class="rq-acl" id="rq-acl"></div>
+        <div id="rq-exs" style="margin-top:10px;border-top:1px solid #f0f0f0;padding-top:10px"></div>
+      </div>
+      <div style="font-size:13px;color:#666;margin-bottom:8px">¿La recordabas?</div>
+      <div class="row">
+        <button class="btn g" onclick="rqAnswer(true)">Sí ✓</button>
+        <button class="btn r" onclick="rqAnswer(false)">No ✗</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultado del repaso rápido -->
+  <div id="rq-done" style="display:none;margin-bottom:1.25rem">
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1.25rem;text-align:center">
+      <div style="font-size:22px;margin-bottom:6px" id="rq-done-ic">✓</div>
+      <div style="font-size:16px;font-weight:600;color:#1a1a1a;margin-bottom:4px" id="rq-done-title">Repaso completado</div>
+      <div style="font-size:13px;color:#888;margin-bottom:1rem" id="rq-done-sub"></div>
+      <div class="fg" style="margin-bottom:1rem">
+        <div class="fc g"><div class="fl">Recordabas</div><div class="fv" id="rq-ok">0</div></div>
+        <div class="fc r"><div class="fl">Olvidadas</div><div class="fv" id="rq-fail">0</div></div>
+      </div>
+      <button class="btn o" style="width:100%" onclick="rqClose()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="sec-t">Progreso por palabra</div>
+  <div id="d-wlist"></div>
+  <div class="sec-t">Historial de sesiones</div>
+  <div id="d-sess"></div>
+</div>
+
+<!-- ENTRENAMIENTO -->
+<div id="sc-train" class="sc">
+  <div id="t-start">
+    <div class="new-sess-box" id="new-sess-box" style="display:none">
+      <div class="new-sess-txt">Ya entrenaste hoy. ¿Otra ronda con palabras distintas?</div>
+      <button class="new-sess-btn" onclick="forceNew()">Nueva sesión</button>
+    </div>
+    <!-- Repetir palabras del día -->
+    <div class="repeat-today-box" id="repeat-today-box" style="display:none">
+      <div class="repeat-today-txt">🔁 <strong>Repetir las de hoy</strong> — vuelve a practicar exactamente las mismas palabras de tu última sesión</div>
+      <button class="repeat-today-btn" onclick="repeatToday()">Repetir</button>
+    </div>
+    <div class="card" style="padding:1.5rem">
+      <div style="font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:4px;text-align:center">Sesión diaria</div>
+      <div style="font-size:13px;color:#888;margin-bottom:16px;text-align:center">5 palabras · 2 frases · corrección al final</div>
+
+      <!-- Filtro por tipo -->
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:#888;margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:.04em">Entrenar</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px" id="type-filter-btns">
+          <button class="tfilter-btn on" data-ty="all" onclick="setTypeFilter('all')">Todo</button>
+          <button class="tfilter-btn" data-ty="v" onclick="setTypeFilter('v')">Verbos</button>
+          <button class="tfilter-btn" data-ty="n" onclick="setTypeFilter('n')">Sustantivos</button>
+          <button class="tfilter-btn" data-ty="a" onclick="setTypeFilter('a')">Adjetivos</button>
+          <button class="tfilter-btn" data-ty="d" onclick="setTypeFilter('d')">Conectores</button>
+          <button class="tfilter-btn" data-ty="e" onclick="setTypeFilter('e')">Expresiones</button>
+        </div>
+      </div>
+
+      <!-- Contador de disponibles -->
+      <div style="font-size:12px;color:#888;margin-bottom:12px;text-align:center" id="filter-count"></div>
+
+      <!-- Shuffle -->
+      <div class="shuffle-row" style="justify-content:center;margin-bottom:12px">
+        <button class="shuffle-btn" onclick="shuffleAndPrep()">
+          <span class="shuffle-icon">⟳</span> Mezclar
+        </button>
+        <span class="shuffle-info" id="shuffle-info"></span>
+      </div>
+
+      <div class="pills" id="t-pills"></div>
+      <button class="btn p" id="btn-comenzar" style="flex:none;width:100%;margin-top:4px" onclick="startSess()">Comenzar</button>
+    </div>
+  </div>
+
+  <div id="t-active" style="display:none">
+    <div class="trow">
+      <div style="font-size:12px;color:#888">Palabra <span id="t-cur">1</span>/<span id="t-max">5</span></div>
+      <div style="display:flex;align-items:center;gap:7px"><div class="dot" id="tdot"></div><div class="tmr" id="tmr">00:00</div></div>
+    </div>
+    <div class="pb"><div class="pbf" id="tbar" style="width:0%"></div></div>
+
+    <div id="ph-card">
+      <div class="card bigcard" onclick="doReveal()">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <div class="bdg" id="c-bdg"></div>
+          <div class="card-srs-badge" id="c-srs-badge"></div>
+        </div>
+        <div class="bw" id="c-w"></div>
+        <div class="tap">toca para ver la respuesta</div>
+      </div>
+    </div>
+
+    <div id="ph-rev" style="display:none">
+      <div class="card">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <div class="bdg" id="r-bdg"></div>
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a;flex:1" id="r-w"></div>
+          <button onclick="speakDE(document.getElementById('r-w').textContent)" title="Escuchar pronunciación" style="background:none;border:1px solid #ddd;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:16px;color:#666;transition:all .15s" onmouseover="this.style.borderColor='#3C3489';this.style.color='#3C3489'" onmouseout="this.style.borderColor='#ddd';this.style.color='#666'">🔊</button>
+          <button onclick="audioEnabled=!audioEnabled;this.style.opacity=audioEnabled?'1':'0.4'" title="Activar/desactivar audio" style="background:none;border:1px solid #ddd;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:14px;color:#888;transition:all .15s">🔇</button>
+        </div>
+        <div class="tr" id="r-tr"></div>
+        <div class="ac" id="r-ac"></div>
+        <div id="r-ex"></div>
+      </div>
+      <div style="font-size:13px;color:#666;margin-bottom:8px">¿Lo sabías antes de ver la respuesta?</div>
+      <div class="row">
+        <button class="btn g" onclick="cardRes(true)">Sí, lo sabía</button>
+        <button class="btn r" onclick="cardRes(false)">No, no lo sabía</button>
+      </div>
+    </div>
+
+    <div id="ph-write" style="display:none">
+      <div class="card">
+        <div class="gl">FRASE <span id="w-n" style="font-weight:600;color:#534AB7"></span> DE 2 — traduce al alemán usando <span id="w-word-hint" style="font-weight:600;color:#1a1a1a"></span>:</div>
+        <div class="ges" id="w-es"></div>
+      </div>
+      <div class="de-label">Caracteres especiales:</div>
+      <div class="de-keys">
+        <button class="de-key" onclick="ins('ä')">ä</button>
+        <button class="de-key" onclick="ins('ö')">ö</button>
+        <button class="de-key" onclick="ins('ü')">ü</button>
+        <button class="de-key" onclick="ins('Ä')">Ä</button>
+        <button class="de-key" onclick="ins('Ö')">Ö</button>
+        <button class="de-key" onclick="ins('Ü')">Ü</button>
+        <button class="de-key" onclick="ins('ß')">ß</button>
+      </div>
+      <textarea id="w-inp" placeholder="Schreib den Satz auf Deutsch..."></textarea>
+      <div class="saved-flash" id="saved-flash">✓ Guardado</div>
+      <button class="btn p" onclick="saveSentence()">Guardar y continuar →</button>
+    </div>
+
+    <div id="ph-wend" style="display:none">
+      <div class="card" style="text-align:center;padding:1.5rem">
+        <div style="font-size:26px;margin-bottom:6px" id="we-ic"></div>
+        <div style="font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:4px" id="we-msg"></div>
+        <div style="font-size:13px;color:#888" id="we-sub"></div>
+      </div>
+      <button class="btn p" id="we-btn" onclick="nextWord()">Siguiente palabra</button>
+    </div>
+  </div>
+
+  <div id="t-finish" style="display:none">
+    <div class="done">
+      <div class="done-t" id="f-title">Sesión completada</div>
+      <div class="done-s" id="f-time"></div>
+      <div class="fg">
+        <div class="fc g"><div class="fl">Sabías</div><div class="fv" id="f-co">0</div></div>
+        <div class="fc r"><div class="fl">No sabías</div><div class="fv" id="f-wr">0</div></div>
+      </div>
+      <!-- Barra de progreso sesión -->
+      <div style="margin-bottom:1rem">
+        <div style="background:#e8e8e8;border-radius:20px;height:6px;overflow:hidden">
+          <div id="f-bar" style="height:100%;width:0%;border-radius:20px;background:#639922;transition:width .6s"></div>
+        </div>
+      </div>
+      <div id="f-weak" style="margin-bottom:1.25rem;text-align:left"></div>
+      <!-- Botón repetir falladas -->
+      <div id="f-repeat-box" style="display:none;margin-bottom:.85rem">
+        <button class="btn r" style="width:100%" onclick="repeatFailed()">Repetir palabras falladas</button>
+      </div>
+      <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;text-align:left">Tus frases:</div>
+      <div class="frases-preview" id="frases-preview"></div>
+      <div style="background:#f0effe;border-radius:10px;padding:12px;margin-bottom:1rem;font-size:12px;color:#3C3489;line-height:1.6">
+        Copia estas frases y pégalas en el chat para que Claude las corrija.
+      </div>
+      <button class="btn o" style="width:100%;margin-bottom:8px" onclick="otraRonda()">Otra ronda hoy</button>
+      <button class="btn o" style="width:100%" onclick="go('dash')">Ver dashboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- GESTIÓN DE PALABRAS -->
+<div id="sc-words" class="sc">
+
+  <!-- TABS -->
+  <div style="display:flex;gap:4px;border-bottom:1px solid #e8e8e8;margin-bottom:1.25rem">
+    <button id="wtab-single" onclick="wTab('single')" style="padding:8px 16px;font-size:13px;cursor:pointer;border:none;background:none;color:#3C3489;border-bottom:2px solid #3C3489;margin-bottom:-1px;font-family:inherit;font-weight:500">Una palabra</button>
+    <button id="wtab-batch" onclick="wTab('batch')" style="padding:8px 16px;font-size:13px;cursor:pointer;border:none;background:none;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit">Lista de palabras</button>
+    <button id="wtab-import" onclick="wTab('import')" style="padding:8px 16px;font-size:13px;cursor:pointer;border:none;background:none;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit">Importar de Claude</button>
+  </div>
+
+  <!-- SINGLE WORD -->
+  <div id="wpanel-single">
+  <!-- Formulario añadir -->
+  <div class="card" style="margin-bottom:1rem">
+    <div style="font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px">Añadir nueva palabra</div>
+    <div style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.5">Escribe la palabra y opcionalmente algo de contexto. La IA genera la traducción, gramática, ejemplos y frases automáticamente.</div>
+
+    <div style="margin-bottom:10px">
+      <label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Palabra o expresión en alemán</label>
+      <input id="nw" placeholder="z.B. verzweifeln · etwas auf Anhieb · die Redewendung..." style="width:100%;padding:9px 12px;font-size:14px;border:1px solid #ddd;border-radius:8px;background:#fafafa;color:#1a1a1a;font-family:inherit" onkeydown="if(event.key==='Enter')generateWord()">
+    </div>
+    <div style="margin-bottom:14px">
+      <label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Contexto adicional (opcional)</label>
+      <input id="nctx" placeholder="z.B. la vi en un texto, significa desesperarse, se usa con AKK..." style="width:100%;padding:8px 12px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fafafa;color:#1a1a1a;font-family:inherit">
+    </div>
+
+    <!-- Loading state -->
+    <div id="gen-loading" style="display:none;text-align:center;padding:.75rem;background:#f0effe;border-radius:8px;margin-bottom:10px">
+      <div style="font-size:13px;color:#3C3489;margin-bottom:6px">La IA está generando la entrada...</div>
+      <div style="display:inline-flex;gap:4px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#3C3489;animation:ld 1s infinite .0s both;display:inline-block"></span>
+        <span style="width:6px;height:6px;border-radius:50%;background:#3C3489;animation:ld 1s infinite .15s both;display:inline-block"></span>
+        <span style="width:6px;height:6px;border-radius:50%;background:#3C3489;animation:ld 1s infinite .3s both;display:inline-block"></span>
+      </div>
+    </div>
+
+    <!-- Preview generado -->
+    <div id="gen-preview" style="display:none;background:#f5f4f0;border-radius:10px;padding:14px;margin-bottom:12px">
+      <div style="font-size:11px;color:#888;margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:.04em">Vista previa — generado por IA</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span id="prev-word" style="font-size:17px;font-weight:600;color:#1a1a1a"></span>
+        <span id="prev-badge" style="font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500"></span>
+      </div>
+      <div id="prev-trans" style="font-size:14px;color:#3C3489;font-weight:500;margin-bottom:4px"></div>
+      <div id="prev-gram" style="font-size:12px;color:#666;font-style:italic;margin-bottom:6px"></div>
+      <div id="prev-acl" style="font-size:12px;color:#555;background:#fff;border-radius:6px;padding:7px 10px;margin-bottom:6px;line-height:1.5"></div>
+      <div style="font-size:11px;color:#888;margin-bottom:4px">Frases de ejercicio:</div>
+      <div id="prev-frases" style="font-size:12px;color:#555;line-height:1.8"></div>
+    </div>
+
+    <!-- Error state -->
+    <div id="gen-error" style="display:none;background:#FCEBEB;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#791F1F"></div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <button class="btn p" style="flex:none;padding:9px 20px" id="btn-generate" onclick="generateWord()">Generar con IA</button>
+      <button class="btn o" style="flex:none;padding:9px 16px;display:none" id="btn-save-word" onclick="saveGeneratedWord()">Guardar palabra</button>
+      <button class="btn o" style="flex:none;padding:9px 16px;display:none" id="btn-regen" onclick="generateWord()">Regenerar</button>
+      <span id="add-ok" style="font-size:12px;color:#639922;display:none">✓ Guardada correctamente</span>
+    </div>
+  </div>
+  </div><!-- end wpanel-single -->
+
+  <!-- BATCH IMPORT -->
+  <div id="wpanel-batch" style="display:none">
+    <div class="card" style="margin-bottom:1rem">
+      <div style="font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px">Importar lista de palabras</div>
+      <div style="font-size:12px;color:#888;margin-bottom:14px;line-height:1.6">
+        Pega una lista de palabras en cualquier formato — una por línea, con o sin traducción, con notas o sin ellas. La IA las procesa en lotes de 10 para no colapsar.
+      </div>
+      <div style="background:#f0effe;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#3C3489;line-height:1.6">
+        <strong>Ejemplos de formatos aceptados:</strong><br>
+        · verzweifeln<br>
+        · scheitern — fracasar<br>
+        · die Redewendung (expresión idiomática)<br>
+        · voraussetzen: presuponer, requiere AKK<br>
+        · endlich = por fin
+      </div>
+      <textarea id="batch-input" placeholder="Pega aquí tu lista de palabras..." style="width:100%;padding:10px 12px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fafafa;color:#1a1a1a;font-family:inherit;min-height:160px;resize:vertical;margin-bottom:12px"></textarea>
+
+      <!-- Progress -->
+      <div id="batch-progress" style="display:none;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="font-size:13px;color:#3C3489;font-weight:500" id="batch-status">Procesando...</div>
+          <div style="font-size:12px;color:#888" id="batch-counter">0 / 0</div>
+        </div>
+        <div style="background:#e8e8e8;border-radius:20px;height:6px;overflow:hidden">
+          <div id="batch-bar" style="height:100%;background:#3C3489;border-radius:20px;transition:width .4s;width:0%"></div>
+        </div>
+        <div style="font-size:11px;color:#888;margin-top:6px" id="batch-detail"></div>
+      </div>
+
+      <!-- Results -->
+      <div id="batch-results" style="display:none;margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;color:#1a1a1a;margin-bottom:8px" id="batch-results-title"></div>
+        <div id="batch-results-list" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+
+      <!-- Error -->
+      <div id="batch-error" style="display:none;background:#FCEBEB;border-radius:8px;padding:10px;margin-bottom:10px;font-size:12px;color:#791F1F"></div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="btn p" id="btn-batch" style="flex:none;padding:9px 20px" onclick="startBatchImport()">Importar con IA</button>
+        <button class="btn o" id="btn-batch-save" style="flex:none;padding:9px 16px;display:none" onclick="saveBatchWords()">Guardar todas</button>
+        <span id="batch-ok" style="font-size:12px;color:#639922;display:none"></span>
+      </div>
+    </div>
+  </div><!-- end wpanel-batch -->
+
+  <!-- IMPORTAR DE CLAUDE -->
+  <div id="wpanel-import" style="display:none">
+    <div class="card" style="margin-bottom:1rem">
+      <div style="font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px">Importar palabras desde Claude</div>
+      <div style="font-size:12px;color:#888;margin-bottom:12px;line-height:1.6">
+        Pídeme palabras en el chat y te daré un bloque JSON. Pégalo aquí y se añaden al instante — sin descargar nada nuevo.
+      </div>
+
+      <div style="background:#f0effe;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#3C3489;line-height:1.7">
+        <strong>Cómo funciona:</strong><br>
+        1. En el chat dile a Claude: <em>"dame las palabras en formato JSON para importar"</em><br>
+        2. Copia el bloque JSON que te da<br>
+        3. Pégalo aquí y presiona Importar
+      </div>
+
+      <textarea id="import-input" placeholder='[{"w":"verzweifeln","t":"desesperarse","ty":"v","gram":"+AKK","acl":"...","exs":["..."],"frases":[{"es":"..."},{"es":"..."}]}]' style="width:100%;padding:10px 12px;font-size:12px;border:1px solid #ddd;border-radius:8px;background:#fafafa;color:#1a1a1a;font-family:monospace;min-height:140px;resize:vertical;margin-bottom:10px"></textarea>
+
+      <div id="import-preview" style="display:none;background:#f5f4f0;border-radius:8px;padding:10px 12px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:500;color:#1a1a1a;margin-bottom:6px" id="import-preview-title"></div>
+        <div id="import-preview-list" style="display:flex;flex-direction:column;gap:5px"></div>
+      </div>
+
+      <div id="import-error" style="display:none;background:#FCEBEB;border-radius:8px;padding:9px 12px;margin-bottom:10px;font-size:12px;color:#791F1F"></div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn p" style="flex:none;padding:9px 20px" onclick="previewImport()">Verificar</button>
+        <button class="btn o" id="btn-import-save" style="flex:none;padding:9px 16px;display:none" onclick="saveImport()">Añadir al juego</button>
+        <span id="import-ok" style="font-size:12px;color:#639922;display:none"></span>
+      </div>
+    </div>
+  </div><!-- end wpanel-import -->
+
+  <!-- Lista de todas las palabras -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+    <div class="sec-t" style="margin:0">Todas las palabras (<span id="words-count">0</span>)</div>
+    <div style="display:flex;gap:6px">
+      <select id="filter-ty" onchange="renderWordsList()" style="padding:5px 8px;font-size:12px;border:1px solid #ddd;border-radius:7px;background:#fff;color:#333;font-family:inherit">
+        <option value="all">Todos</option>
+        <option value="v">Verbos</option>
+        <option value="n">Sustantivos</option>
+        <option value="a">Adjetivos</option>
+        <option value="d">Conectores</option>
+        <option value="e">Expresiones</option>
+      </select>
+      <input id="filter-search" placeholder="Buscar..." onkeyup="renderWordsList()" style="padding:5px 8px;font-size:12px;border:1px solid #ddd;border-radius:7px;background:#fff;color:#333;font-family:inherit;width:100px">
+    </div>
+  </div>
+  <div id="all-words-list"></div>
+</div>
+
+<!-- REPASO -->
+<div id="sc-recap" class="sc">
+  <div class="card" style="margin-bottom:1rem">
+    <div style="font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px">Repaso semanal</div>
+    <div style="font-size:13px;color:#888">Solo significado · sin escritura · hasta 30 palabras</div>
+  </div>
+  <button class="btn p" id="rc-btn" onclick="startRecap()" style="flex:none;width:100%;margin-bottom:1rem">Comenzar repaso</button>
+  <div id="rc-area" style="display:none">
+    <div style="font-size:12px;color:#888;margin-bottom:8px" id="rc-prog"></div>
+    <div class="card bigcard" id="rc-front" onclick="rcReveal()">
+      <div class="bdg" id="rc-bdg"></div>
+      <div class="bw" id="rc-w"></div>
+      <div class="tap">toca para ver significado</div>
+    </div>
+    <div class="card" id="rc-back" style="display:none">
+      <div class="tr" id="rc-tr"></div>
+      <div class="gr" id="rc-gr"></div>
+    </div>
+    <div class="row" id="rc-btns" style="display:none">
+      <button class="btn g" onclick="markRc(true)">Lo sé</button>
+      <button class="btn r" onclick="markRc(false)">No lo sé</button>
+    </div>
+  </div>
+  <div id="rc-done" style="display:none;text-align:center;padding:1.5rem">
+    <div style="font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:8px">Repaso completado</div>
+    <div id="rc-res" style="font-size:13px;color:#888"></div>
+  </div>
+</div>
+</div>
+
+<script>
+const TC={v:["#EAF3DE","#27500A"],n:["#E6F1FB","#0C447C"],a:["#FAEEDA","#633806"],d:["#EEEDFE","#3C3489"],e:["#E1F5EE","#085041"]};
+const TL={v:"Verbo",n:"Sustantivo",a:"Adjetivo",d:"Conector",e:"Expresión"};
+const WKEY='b2_words_v1', SKEY='b2_stats_v1';
+
+let W=[], ST={}, SESS=[];
+let tsec=0, tint=null;
+let TW=[], sidx=0, sco=0, swr=0, cw=null, wnum=0, cknown=false;
+let sentencias=[], usedToday=new Set(), sessionCount=0;
+let RQ=[], rco=0, rwr=0;
+let shuffleSeed=Date.now();
+let activeTypeFilter='all';
+// Repaso rápido del día anterior
+let RQW=[], rqIdx=0, rqOk=0, rqFail=0, rqAnswers=[];
+// Palabras del día guardadas para repetir
+const TWKEY='b2_today_words';
+
+// ── REPASO ESPACIADO (SRS) ──
+// Intervalos en días por nivel: 0=nuevo, 1=1d, 2=3d, 3=7d, 4=14d, 5=30d, 6=maestro
+const SRS_INTERVALS=[0,1,3,7,14,30,999];
+
+function srsNextDate(level){
+  const days=SRS_INTERVALS[Math.min(level,6)];
+  if(days===0)return null;
+  const d=new Date();
+  d.setDate(d.getDate()+days);
+  return d.toISOString().split('T')[0];
+}
+
+function isDueToday(word){
+  const s=ST[word];
+  if(!s)return true;
+  if(!s.srsNext)return true; // nunca estudiada con SRS
+  return s.srsNext<=dk();
+}
+
+function updateSRS(word, correct){
+  if(!ST[word])ST[word]={c:0,e:0,st:0,ls:null,srsLevel:0,srsNext:null};
+  const s=ST[word];
+  if(!s.srsLevel)s.srsLevel=0;
+  if(correct){
+    s.srsLevel=Math.min((s.srsLevel||0)+1, 6);
+  } else {
+    s.srsLevel=Math.max((s.srsLevel||0)-1, 0);
+  }
+  s.srsNext=srsNextDate(s.srsLevel);
+}
+
+// ── AUDIO (Web Speech API) ──
+let audioEnabled=true;
+const synth=window.speechSynthesis;
+
+function speakDE(text){
+  if(!audioEnabled||!synth)return;
+  synth.cancel();
+  const utt=new SpeechSynthesisUtterance(text);
+  utt.lang='de-DE';
+  utt.rate=0.85;
+  utt.pitch=1;
+  // Buscar voz alemana
+  const voices=synth.getVoices();
+  const deVoice=voices.find(v=>v.lang.startsWith('de'));
+  if(deVoice)utt.voice=deVoice;
+  synth.speak(utt);
+}
+
+function setTypeFilter(ty){
+  activeTypeFilter=ty;
+  // Update button styles
+  document.querySelectorAll('.tfilter-btn').forEach(b=>{
+    b.classList.toggle('on', b.dataset.ty===ty);
+  });
+  // Reset used words when changing filter
+  usedToday.clear();
+  shuffleSeed=Date.now();
+  prepToday(true);
+}
+
+function dk(){const d=new Date();return`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
+
+// Fecha visible en nav
+document.getElementById('nav-date').textContent=new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+
+function ins(ch){
+  const ta=document.getElementById('w-inp');
+  ta.focus();
+  const s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;
+  ta.value=v.substring(0,s)+ch+v.substring(e);
+  ta.selectionStart=ta.selectionEnd=s+ch.length;
+}
+
+// ── VERSIÓN DEL SEED ──
+const SEED_VERSION='v79c';
+const VKEY='b2_seed_version';
+
+// ── STORAGE ──
+function loadStorage(){
+  try{
+    const wd=localStorage.getItem(WKEY);
+    const sd=localStorage.getItem(SKEY);
+    if(wd)W=JSON.parse(wd);
+    if(sd){const d=JSON.parse(sd);ST=d.s||{};SESS=d.ss||[];}
+  }catch(e){W=[];ST={};SESS=[];}
+}
+function saveSt(){try{localStorage.setItem(SKEY,JSON.stringify({s:ST,ss:SESS}));}catch(e){}}
+function saveW(){try{localStorage.setItem(WKEY,JSON.stringify(W));}catch(e){}}
+
+function init(){
+  loadStorage();
+  const seed=getSeedWords();
+  const savedVersion=localStorage.getItem(VKEY);
+  let added=0, updated=0;
+
+  if(savedVersion!==SEED_VERSION){
+    // Versión nueva: actualizar campos w/t/ty/gram/acl/exs/frases de todas las seed words
+    seed.forEach(sw=>{
+      const existing=W.find(x=>x.w.toLowerCase()===sw.w.toLowerCase());
+      if(existing){
+        // Actualizar todos los campos del seed (mantener stats del usuario)
+        existing.w=sw.w;
+        existing.t=sw.t;
+        existing.ty=sw.ty;
+        existing.gram=sw.gram;
+        existing.acl=sw.acl;
+        existing.exs=sw.exs;
+        existing.frases=sw.frases;
+        updated++;
+      } else {
+        W.push(sw);
+        added++;
+      }
+    });
+    localStorage.setItem(VKEY,SEED_VERSION);
+    saveW();
+    console.log(`✓ Seed v${SEED_VERSION}: ${added} nuevas, ${updated} actualizadas. Total: ${W.length}`);
+  } else {
+    // Misma versión: solo añadir palabras nuevas
+    seed.forEach(sw=>{
+      if(!W.find(x=>x.w.toLowerCase()===sw.w.toLowerCase())){
+        W.push(sw);added++;
+      }
+    });
+    if(added>0){saveW();console.log(`✓ ${added} palabras nuevas. Total: ${W.length}`);}
+  }
+
+  W.forEach(x=>{if(!ST[x.w])ST[x.w]={c:0,e:0,st:0,ls:null};});
+  saveSt();
+  rDash();
+  prepToday();
+}
+
+// ── SHUFFLE — mezcla con seed diferente cada vez ──
+function shuffle(arr, seed){
+  const a=[...arr];
+  let s=seed||Date.now();
+  for(let i=a.length-1;i>0;i--){
+    s=(s*1664525+1013904223)&0xffffffff;
+    const j=Math.abs(s)%(i+1);
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function shuffleAndPrep(){
+  shuffleSeed=Date.now();
+  usedToday.clear();
+  prepToday(false, true);
+  const btn=document.querySelector('.shuffle-btn .shuffle-icon');
+  btn.style.transform='rotate(360deg)';
+  setTimeout(()=>btn.style.transform='',500);
+  document.getElementById('shuffle-info').textContent='¡Mezclado!';
+  setTimeout(()=>document.getElementById('shuffle-info').textContent='',2000);
+}
+
+function prepToday(force=false, reshuffled=false){
+  const td=dk();
+  const sesionesHoy=SESS.filter(s=>s.d===td).length;
+  
+  if(sesionesHoy>0 && !force && !reshuffled){
+    document.getElementById('new-sess-box').style.display='flex';
+  } else {
+    document.getElementById('new-sess-box').style.display='none';
+  }
+
+  // Mostrar botón repetir palabras del día si hay sesión hoy guardada
+  try{
+    const saved=JSON.parse(localStorage.getItem(TWKEY)||'null');
+    const repeatBox=document.getElementById('repeat-today-box');
+    if(repeatBox){
+      if(saved&&saved.d===td&&saved.words&&saved.words.length){
+        repeatBox.style.display='flex';
+        repeatBox.querySelector('.repeat-today-txt').innerHTML=
+          `🔁 <strong>Repetir las de hoy</strong> — las mismas ${saved.words.length} palabras de tu última sesión`;
+      } else {
+        repeatBox.style.display='none';
+      }
+    }
+  }catch(e){}
+
+  // Filtrar por tipo seleccionado
+  let filtered=activeTypeFilter==='all' ? [...W] : W.filter(x=>x.ty===activeTypeFilter);
+
+  // Mostrar contador de disponibles
+  const countEl=document.getElementById('filter-count');
+  if(countEl){
+    const label=activeTypeFilter==='all'?'todas las categorías':{v:'verbos',n:'sustantivos',a:'adjetivos',d:'conectores',e:'expresiones'}[activeTypeFilter];
+    const btn=document.getElementById('btn-comenzar');
+    if(filtered.length<10){
+      countEl.textContent=`Solo hay ${filtered.length} palabras en ${label} — se necesitan mínimo 10`;
+      countEl.style.color='#A32D2D';
+      if(btn)btn.disabled=true;
+    } else {
+      countEl.textContent=`${filtered.length} palabras disponibles en ${label}`;
+      countEl.style.color='#888';
+      if(btn)btn.disabled=false;
+    }
+  }
+
+  // Excluir palabras ya usadas hoy dentro del filtro
+  let pool=filtered.filter(x=>!usedToday.has(x.w));
+  if(pool.length<10){
+    usedToday.clear();
+    pool=[...filtered];
+  }
+
+  // Si aún insuficientes, usar todo
+  if(pool.length<10){
+    pool=[...W].filter(x=>!usedToday.has(x.w));
+    if(pool.length<10){usedToday.clear();pool=[...W];}
+  }
+
+  // Ordenar: SRS vencidas hoy > falladas > nunca vistas > vistas recientemente
+  pool.sort((a,b)=>{
+    const sa=ST[a.w]||{e:0,st:0,ls:null,srsLevel:0,srsNext:null};
+    const sb=ST[b.w]||{e:0,st:0,ls:null,srsLevel:0,srsNext:null};
+    const aDue=isDueToday(a.w)?10:0;
+    const bDue=isDueToday(b.w)?10:0;
+    const pa=bDue + sb.e*3-sb.st*2+(sb.ls===td?-10:0)+(sb.ls?0:5);
+    const pb=aDue + sa.e*3-sa.st*2+(sa.ls===td?-10:0)+(sa.ls?0:5);
+    return pa-pb;
+  });
+
+  // Mezclar con seed y tomar 5
+  const candidates=pool.slice(0,Math.min(30,pool.length));
+  const mixed=shuffle(candidates, shuffleSeed);
+  TW=mixed.slice(0,5);
+
+  // Mostrar pills con tipo coloreado
+  document.getElementById('t-pills').innerHTML=TW.map(x=>{
+    const c=TC[x.ty]||TC.d;
+    return`<span class="pill" style="background:${c[0]};color:${c[1]}">${x.w}</span>`;
+  }).join('');
+
+  document.getElementById('shuffle-info').textContent='';
+}
+
+function forceNew(){
+  shuffleSeed=Date.now();
+  document.getElementById('new-sess-box').style.display='none';
+  prepToday(true);
+}
+
+function startSess(){
+  sidx=0;sco=0;swr=0;tsec=0;sentencias=[];sessionCount++;
+  TW.forEach(x=>usedToday.add(x.w));
+  // Guardar las palabras de hoy para poder repetirlas
+  try{localStorage.setItem(TWKEY,JSON.stringify({d:dk(),words:TW.map(x=>x.w)}));}catch(e){}
+  document.getElementById('t-start').style.display='none';
+  document.getElementById('t-active').style.display='block';
+  clearInterval(tint);
+  tint=setInterval(()=>{
+    tsec++;
+    document.getElementById('tmr').textContent=`${String(Math.floor(tsec/60)).padStart(2,'0')}:${String(tsec%60).padStart(2,'0')}`;
+    const dot=document.getElementById('tdot');
+    dot.style.opacity=tsec%2?'0.3':'1';
+    if(tsec===1800){dot.style.background='#639922';dot.style.opacity='1';}
+  },1000);
+  loadW();
+}
+
+function loadW(){
+  if(sidx>=TW.length){finSess();return;}
+  cw=TW[sidx];wnum=0;cknown=false;
+  document.getElementById('t-cur').textContent=sidx+1;
+  document.getElementById('t-max').textContent=TW.length;
+  document.getElementById('tbar').style.width=`${sidx/TW.length*100}%`;
+  const bs=bdg(cw.ty);
+  ['c-bdg','r-bdg'].forEach(id=>{document.getElementById(id).textContent=TL[cw.ty];document.getElementById(id).style.cssText=bs;});
+  document.getElementById('c-w').textContent=cw.w;
+  document.getElementById('r-w').textContent=cw.w;
+  document.getElementById('r-tr').textContent=cw.t;
+  document.getElementById('r-ac').textContent=cw.acl||'';
+  document.getElementById('r-ex').innerHTML=(cw.exs||[]).map(e=>`<div class="ex">· ${e}</div>`).join('');
+
+  // Etiqueta nivel SRS en la flashcard
+  const SRS_LBL_FC=['Nueva','Nivel 1·1d','Nivel 2·3d','Nivel 3·7d','Nivel 4·14d','Nivel 5·30d','⭐ Maestra'];
+  const SRS_BG=['#f0f0f0','#FCEBEB','#FAEEDA','#E6F1FB','#EAF3DE','#d4f0c4','#e8f5d0'];
+  const SRS_FG=['#999','#A32D2D','#633806','#0C447C','#27500A','#1a5c05','#2d6b00'];
+  const lvl=Math.min((ST[cw.w]?.srsLevel||0),6);
+  const badgeEl=document.getElementById('c-srs-badge');
+  if(badgeEl){
+    const due=isDueToday(cw.w)&&lvl>0;
+    badgeEl.textContent=(due?'🔴 ':'')+ SRS_LBL_FC[lvl];
+    badgeEl.style.background=SRS_BG[lvl];
+    badgeEl.style.color=SRS_FG[lvl];
+  }
+
+  ph('card');
+}
+
+// ── SESIÓN SRS — solo palabras pendientes de repaso ──
+function startSRSSession(){
+  const dueWords=W.filter(x=>isDueToday(x.w)&&(ST[x.w]?.srsLevel||0)>0);
+  if(!dueWords.length)return;
+  TW=shuffle(dueWords,Date.now()).slice(0,5);
+  sidx=0;sco=0;swr=0;tsec=0;sentencias=[];sessionCount++;
+  TW.forEach(x=>usedToday.add(x.w));
+  try{localStorage.setItem(TWKEY,JSON.stringify({d:dk(),words:TW.map(x=>x.w)}));}catch(e){}
+  go('train');
+  document.getElementById('t-start').style.display='none';
+  document.getElementById('t-active').style.display='block';
+  document.getElementById('tbar').style.width='0%';
+  clearInterval(tint);
+  tint=setInterval(()=>{
+    tsec++;
+    document.getElementById('tmr').textContent=`${String(Math.floor(tsec/60)).padStart(2,'0')}:${String(tsec%60).padStart(2,'0')}`;
+    const dot=document.getElementById('tdot');
+    dot.style.opacity=tsec%2?'0.3':'1';
+  },1000);
+  loadW();
+}
+
+function doReveal(){
+  ph('rev');
+  // Auto-speak the word in German
+  setTimeout(()=>speakDE(cw.w), 300);
+}
+
+function cardRes(ok){
+  cknown=ok;
+  if(ok){sco++;upSt(cw.w,true);}else{swr++;upSt(cw.w,false);}
+  wnum=0;
+  showWrite();
+}
+
+function showWrite(){
+  wnum++;
+  const f=cw.frases&&cw.frases[wnum-1]?cw.frases[wnum-1]:{es:`Escribe una frase usando "${cw.w}"`};
+  document.getElementById('w-n').textContent=wnum;
+  document.getElementById('w-word-hint').textContent=cw.w;
+  document.getElementById('w-es').textContent=f.es;
+  document.getElementById('w-inp').value='';
+  document.getElementById('saved-flash').classList.remove('show');
+  ph('write');
+}
+
+function saveSentence(){
+  const txt=document.getElementById('w-inp').value.trim();
+  if(!txt)return;
+  const f=cw.frases&&cw.frases[wnum-1]?cw.frases[wnum-1]:{es:`Frase con ${cw.w}`};
+  sentencias.push({palabra:cw.w,fraseES:f.es,respuesta:txt});
+  const fl=document.getElementById('saved-flash');
+  fl.classList.add('show');
+  setTimeout(()=>{fl.classList.remove('show');wnum>=2?wordEnd():showWrite();},400);
+}
+
+function wordEnd(){
+  const s=ST[cw.w];
+  document.getElementById('we-ic').textContent=s&&s.st>=3?'★':'';
+  document.getElementById('we-msg').textContent=s&&s.st>=3?'¡Palabra dominada!':cknown?'Bien hecho':'Sigue practicando';
+  document.getElementById('we-sub').textContent=`${cw.w} → ${cw.t}`;
+  document.getElementById('we-btn').textContent=sidx>=TW.length-1?'Ver resultados':'Siguiente palabra';
+  ph('wend');
+}
+
+function nextWord(){sidx++;loadW();}
+function ph(p){['card','rev','write','wend'].forEach(id=>document.getElementById('ph-'+id).style.display=id===p?'block':'none');}
+function bdg(ty){const c=TC[ty]||TC.d;return`font-size:11px;padding:2px 10px;border-radius:20px;background:${c[0]};color:${c[1]};font-weight:500`;}
+
+function upSt(w,ok){
+  if(!ST[w])ST[w]={c:0,e:0,st:0,ls:null,srsLevel:0,srsNext:null};
+  if(ok){ST[w].c++;ST[w].st++;}else{ST[w].e++;ST[w].st=0;}
+  ST[w].ls=dk();
+  updateSRS(w,ok);
+  saveSt();
+}
+
+function finSess(){
+  clearInterval(tint);
+  const ts=`${Math.floor(tsec/60)}m ${tsec%60}s`;
+  document.getElementById('t-active').style.display='none';
+  document.getElementById('t-finish').style.display='block';
+
+  // Título dinámico
+  const pct=TW.length?Math.round(sco/TW.length*100):0;
+  const titulo=pct>=80?'¡Excelente sesión! 🌟':pct>=60?'¡Bien hecho! 💪':pct>=40?'Sigue practicando 📚':'A repasar estas palabras 🔁';
+  document.getElementById('f-title').textContent=titulo;
+  document.getElementById('f-time').textContent=`${ts} · ${TW.length} palabras`;
+  document.getElementById('f-co').textContent=sco;
+  document.getElementById('f-wr').textContent=swr;
+
+  // Barra animada
+  setTimeout(()=>{
+    document.getElementById('f-bar').style.width=`${pct}%`;
+    document.getElementById('f-bar').style.background=pct>=70?'#639922':pct>=40?'#F5A623':'#E24B4A';
+  },100);
+
+  // Palabras falladas
+  const failed=TW.filter(x=>!(ST[x.w]&&ST[x.w].st>=1));
+  window._failedWords=[...failed];
+  document.getElementById('f-weak').innerHTML=failed.length?
+    `<div style="font-size:13px;color:#888;margin-bottom:6px">No sabías (${failed.length}):</div>${failed.map(x=>`<span class="pill" style="background:#FCEBEB;color:#791F1F;margin:3px">${x.w}</span>`).join('')}`:'<div style="font-size:13px;color:#27500A;padding:8px 12px;background:#EAF3DE;border-radius:8px">✓ ¡Sabías todas las palabras!</div>';
+
+  // Botón repetir
+  document.getElementById('f-repeat-box').style.display=failed.length?'block':'none';
+
+  // Frases
+  const texto=sentencias.map((s,i)=>`${i+1}. "${s.palabra}" | Español: "${s.fraseES}" | Mi respuesta: "${s.respuesta}"`).join('\n');
+  document.getElementById('frases-preview').innerHTML=sentencias.length?
+    `<div style="font-size:11px;color:#888;margin-bottom:6px">Selecciona y copia el texto para pegarlo en el chat:</div><div style="font-size:12px;color:#333;line-height:1.7;white-space:pre-wrap;user-select:all;background:#f5f4f0;padding:10px;border-radius:8px;max-height:200px;overflow-y:auto">${texto}</div>`:
+    '<div style="font-size:13px;color:#888">No escribiste frases esta sesión.</div>';
+
+  SESS.push({d:dk(),w:TW.length,c:sco,e:swr,t:ts,n:sessionCount,pct});
+  // Guardar estas palabras para el repaso rápido de mañana
+  try{localStorage.setItem('b2_prev_words',JSON.stringify({d:dk(),words:TW.map(x=>x.w)}));}catch(e){}
+  saveSt();rDash();
+}
+
+function repeatFailed(){
+  const failed=window._failedWords||[];
+  if(!failed.length)return;
+  TW=[...failed];
+  sidx=0;sco=0;swr=0;tsec=0;sentencias=[];sessionCount++;
+  failed.forEach(x=>usedToday.add(x.w));
+  document.getElementById('t-finish').style.display='none';
+  document.getElementById('t-active').style.display='block';
+  document.getElementById('tbar').style.width='0%';
+  clearInterval(tint);
+  tint=setInterval(()=>{
+    tsec++;
+    document.getElementById('tmr').textContent=`${String(Math.floor(tsec/60)).padStart(2,'0')}:${String(tsec%60).padStart(2,'0')}`;
+    const dot=document.getElementById('tdot');
+    dot.style.opacity=tsec%2?'0.3':'1';
+  },1000);
+  loadW();
+}
+
+function repeatToday(){
+  // Cargar las palabras guardadas de hoy
+  try{
+    const saved=JSON.parse(localStorage.getItem(TWKEY)||'null');
+    if(!saved||saved.d!==dk())return;
+    const words=saved.words.map(w=>W.find(x=>x.w===w)).filter(Boolean);
+    if(!words.length)return;
+    TW=[...words];
+    sidx=0;sco=0;swr=0;tsec=0;sentencias=[];sessionCount++;
+    document.getElementById('t-start').style.display='none';
+    document.getElementById('t-active').style.display='block';
+    document.getElementById('tbar').style.width='0%';
+    clearInterval(tint);
+    tint=setInterval(()=>{
+      tsec++;
+      document.getElementById('tmr').textContent=`${String(Math.floor(tsec/60)).padStart(2,'0')}:${String(tsec%60).padStart(2,'0')}`;
+      const dot=document.getElementById('tdot');
+      dot.style.opacity=tsec%2?'0.3':'1';
+    },1000);
+    loadW();
+  }catch(e){console.error(e);}
+}
+
+function otraRonda(){
+  shuffleSeed=Date.now();
+  document.getElementById('t-finish').style.display='none';
+  document.getElementById('t-start').style.display='block';
+  prepToday(true);
+}
+
+// ── REPASO RÁPIDO DEL DÍA ANTERIOR ──
+function getYesterdayWords(){
+  const td=dk();
+  // Buscar la sesión más reciente que no sea de hoy
+  const pastSess=[...SESS].reverse().find(s=>s.d!==td);
+  if(!pastSess)return[];
+  // Intentar recuperar del almacenamiento específico
+  try{
+    const savedPrev=JSON.parse(localStorage.getItem('b2_prev_words')||'null');
+    if(savedPrev&&savedPrev.d===pastSess.d&&savedPrev.words){
+      return savedPrev.words.map(w=>W.find(x=>x.w===w)).filter(Boolean);
+    }
+  }catch(e){}
+  // Fallback: palabras vistas en esa fecha por last-seen
+  return W.filter(x=>ST[x.w]&&ST[x.w].ls===pastSess.d);
+}
+
+function rqUpdateDash(){
+  const words=getYesterdayWords();
+  const sec=document.getElementById('rq-section');
+  const active=document.getElementById('rq-active');
+  const done=document.getElementById('rq-done');
+  if(!sec)return;
+  if(words.length>0&&active.style.display==='none'&&done.style.display==='none'){
+    sec.style.display='block';
+    document.getElementById('rq-count-label').textContent=`${words.length} palabras`;
+    document.getElementById('rq-mini-list').innerHTML=words.map(x=>{
+      const c=TC[x.ty]||TC.d;
+      return`<span class="pill" style="background:${c[0]};color:${c[1]}">${x.w}</span>`;
+    }).join('');
+  } else if(words.length===0){
+    sec.style.display='none';
+  }
+}
+
+function startQuickReview(){
+  RQW=shuffle(getYesterdayWords(),Date.now());
+  if(!RQW.length)return;
+  rqIdx=0;rqOk=0;rqFail=0;rqAnswers=[];
+  document.getElementById('rq-section').style.display='none';
+  document.getElementById('rq-active').style.display='block';
+  document.getElementById('rq-done').style.display='none';
+  rqLoad();
+}
+
+function rqLoad(){
+  if(rqIdx>=RQW.length){rqFinish();return;}
+  const x=RQW[rqIdx];
+  const total=RQW.length;
+  document.getElementById('rq-prog').textContent=`${rqIdx+1} / ${total}`;
+  document.getElementById('rq-dots').innerHTML=RQW.map((_,i)=>{
+    let cls='rq-dot';
+    if(i<rqIdx) cls+=rqAnswers[i]?' ok':' fail';
+    else if(i===rqIdx) cls+=' curr';
+    return`<div class="${cls}"></div>`;
+  }).join('');
+  const bs=bdg(x.ty);
+  document.getElementById('rq-bdg').textContent=TL[x.ty];
+  document.getElementById('rq-bdg').style.cssText=bs;
+  document.getElementById('rq-word').textContent=x.w;
+  document.getElementById('rq-tap').style.display='block';
+  document.getElementById('rq-card').classList.remove('revealed');
+  document.getElementById('rq-back').style.display='none';
+}
+
+function rqReveal(){
+  const x=RQW[rqIdx];
+  const card=document.getElementById('rq-card');
+  if(card.classList.contains('revealed'))return;
+  card.classList.add('revealed');
+  document.getElementById('rq-tap').style.display='none';
+  document.getElementById('rq-trans').textContent=x.t;
+  document.getElementById('rq-gram').textContent=x.gram||'';
+  document.getElementById('rq-acl').textContent=x.acl||'';
+  const exsEl=document.getElementById('rq-exs');
+  if(exsEl){
+    exsEl.innerHTML=(x.exs&&x.exs.length)
+      ?`<div style="font-size:11px;font-weight:600;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Ejemplos</div>`
+       +(x.exs.map(e=>`<div class="ex" style="font-size:12px;color:#444;margin-bottom:4px">· ${e}</div>`).join(''))
+      :'';
+  }
+  document.getElementById('rq-back').style.display='block';
+  speakDE(x.w);
+}
+
+function rqAnswer(ok){
+  rqAnswers[rqIdx]=ok;
+  if(ok)rqOk++;else rqFail++;
+  rqIdx++;
+  rqLoad();
+}
+
+function rqFinish(){
+  document.getElementById('rq-active').style.display='none';
+  document.getElementById('rq-done').style.display='block';
+  const pct=RQW.length?Math.round(rqOk/RQW.length*100):0;
+  document.getElementById('rq-done-ic').textContent=pct>=80?'🌟':pct>=60?'👍':'🔁';
+  document.getElementById('rq-done-title').textContent=
+    pct>=80?'¡Excelente memoria!':pct>=60?'Bien, sigue así':'Hay que seguir repasando';
+  document.getElementById('rq-done-sub').textContent=
+    `Recordabas ${rqOk} de ${RQW.length} palabras de ayer`;
+  document.getElementById('rq-ok').textContent=rqOk;
+  document.getElementById('rq-fail').textContent=rqFail;
+}
+
+function rqClose(){
+  document.getElementById('rq-done').style.display='none';
+  if(window._rqDoneCallback){
+    window._rqDoneCallback();
+    window._rqDoneCallback=null;
+  }
+}
+
+// ── REPASO VOLUNTARIO POR NIVEL ──
+let volLvlFilter='all';
+let VRW=[], vrIdx=0, vrOk=0, vrFail=0;
+
+function volFilter(lvl){
+  volLvlFilter=lvl;
+  document.querySelectorAll('.vol-btn').forEach(b=>{
+    b.classList.toggle('on', b.dataset.lvl===lvl);
+  });
+  volUpdateCount();
+}
+
+function volGetWords(){
+  if(volLvlFilter==='all') return W.filter(x=>(ST[x.w]?.srsLevel||0)>=1);
+  if(volLvlFilter==='25')  return W.filter(x=>{const l=ST[x.w]?.srsLevel||0;return l>=2&&l<=5;});
+  if(volLvlFilter==='6')   return W.filter(x=>(ST[x.w]?.srsLevel||0)>=6);
+  return [];
+}
+
+function volUpdateCount(){
+  const words=volGetWords();
+  const btn=document.getElementById('vol-start-btn');
+  const cnt=document.getElementById('vol-count');
+  if(cnt) cnt.textContent=words.length
+    ? `${words.length} palabras disponibles — se elegirán 5 al azar`
+    : 'No hay palabras en este nivel todavía';
+  if(btn) btn.disabled=words.length===0;
+}
+
+function volUpdateDash(){
+  // Actualizar contadores en los botones
+  const all=W.filter(x=>(ST[x.w]?.srsLevel||0)>=1);
+  const prog=W.filter(x=>{const l=ST[x.w]?.srsLevel||0;return l>=2&&l<=5;});
+  const maest=W.filter(x=>(ST[x.w]?.srsLevel||0)>=6);
+  const n25=document.getElementById('vol-n-25');
+  const n6=document.getElementById('vol-n-6');
+  if(n25) n25.textContent=prog.length?`(${prog.length})`:'';
+  if(n6)  n6.textContent=maest.length?`(${maest.length})`:'';
+  volUpdateCount();
+}
+
+function startVolReview(){
+  const words=volGetWords();
+  if(!words.length)return;
+  VRW=shuffle(words, Date.now()).slice(0,5);
+  vrIdx=0;vrOk=0;vrFail=0;
+  // Reutilizamos el mismo sistema que el repaso rápido (rq)
+  RQW=[...VRW];rqIdx=0;rqOk=0;rqFail=0;rqAnswers=[];
+  // Ocultar panel voluntario temporalmente
+  document.getElementById('vol-active-title').style.display='block';
+  document.querySelector('.vol-box').style.display='none';
+  document.getElementById('rq-section').style.display='none';
+  document.getElementById('rq-active').style.display='block';
+  document.getElementById('rq-done').style.display='none';
+  // Sobreescribir el cierre para restaurar el panel
+  window._rqDoneCallback=()=>{
+    document.querySelector('.vol-box').style.display='block';
+    document.getElementById('vol-active-title').style.display='none';
+    volUpdateDash();
+  };
+  rqLoad();
+}
+
+function calcStreak(){
+  const days=[...new Set(SESS.map(s=>s.d))].sort();
+  if(!days.length)return{streak:0,best:0};
+  let streak=1,best=1,cur=1;
+  for(let i=1;i<days.length;i++){
+    const prev=new Date(days[i-1].split('-').join('/'));
+    const curr=new Date(days[i].split('-').join('/'));
+    const diff=(curr-prev)/(1000*60*60*24);
+    if(diff===1){cur++;best=Math.max(best,cur);}
+    else cur=1;
+  }
+  const today=dk();
+  const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
+  const yd=`${yesterday.getFullYear()}-${yesterday.getMonth()+1}-${yesterday.getDate()}`;
+  const lastDay=days[days.length-1];
+  if(lastDay===today)streak=cur;
+  else if(lastDay===yd)streak=cur;
+  else streak=0;
+  return{streak,best:Math.max(best,cur)};
+}
+
+function rDash(){
+  document.getElementById('d-tot').textContent=W.length;
+  document.getElementById('d-ok').textContent=W.filter(x=>ST[x.w]&&(ST[x.w].srsLevel||0)>=6).length;
+  document.getElementById('d-days').textContent=new Set(SESS.map(s=>s.d)).size;
+  const due=W.filter(x=>isDueToday(x.w)).length;
+  const dueEl=document.getElementById('d-due');
+  if(dueEl)dueEl.textContent=due;
+
+  // Racha
+  const{streak,best}=calcStreak();
+  const strEl=document.getElementById('d-streak');
+  const bestEl=document.getElementById('d-best-streak');
+  const subEl=document.getElementById('d-streak-sub');
+  if(strEl)strEl.textContent=streak;
+  if(bestEl)bestEl.textContent=best;
+  if(subEl){
+    const trainedToday=SESS.some(s=>s.d===dk());
+    subEl.textContent=trainedToday?'¡Racha activa hoy! ✓':streak>0?'Entrena hoy para mantenerla':'Empieza tu racha entrenando hoy';
+  }
+
+  // Panel dominio SRS
+  const SRS_COLORS=['#f0f0f0','#FCEBEB','#FAEEDA','#E6F1FB','#EAF3DE','#d4f0c4','#639922'];
+  const SRS_TXT=['#999','#A32D2D','#633806','#0C447C','#27500A','#1a5c05','#fff'];
+  const SRS_LBL=['Nueva','1d','3d','7d','14d','30d','⭐'];
+  const SRS_FULL=['Nueva','1 día','3 días','7 días','14 días','30 días','Maestro'];
+  const levels=[0,0,0,0,0,0,0];
+  W.forEach(x=>{levels[Math.min((ST[x.w]?.srsLevel||0),6)]++;});
+  const panelEl=document.getElementById('srs-panel');
+  if(panelEl){
+    panelEl.innerHTML=levels.map((n,i)=>`
+      <div class="srs-col" style="background:${SRS_COLORS[i]}" title="${SRS_FULL[i]}: ${n} palabras">
+        <div class="srs-col-n" style="color:${SRS_TXT[i]}">${n}</div>
+        <div class="srs-col-l" style="color:${SRS_TXT[i]}">${SRS_LBL[i]}</div>
+        <div class="srs-col-bar" style="background:${SRS_TXT[i]};width:${W.length?Math.round(n/W.length*100):0}%"></div>
+      </div>`).join('');
+  }
+  const sumEl=document.getElementById('srs-summary');
+  if(sumEl)sumEl.textContent=`${due} pendientes · ${levels[6]} maestras`;
+  // Botón sesión SRS
+  const srsSessBox=document.getElementById('srs-sess-box');
+  const srsDueCount=document.getElementById('srs-due-count');
+  if(srsSessBox){
+    const dueWords=W.filter(x=>isDueToday(x.w)&&(ST[x.w]?.srsLevel||0)>0);
+    if(dueWords.length>0){
+      srsSessBox.style.display='flex';
+      if(srsDueCount)srsDueCount.textContent=dueWords.length;
+    } else {
+      srsSessBox.style.display='none';
+    }
+  }
+  
+  const SRS_CLR=[['#f5f4f0','#999'],['#FCEBEB','#A32D2D'],['#FAEEDA','#633806'],['#E6F1FB','#0C447C'],['#EAF3DE','#27500A'],['#d4f0c4','#1a5c05'],['#639922','#fff']];
+  const sorted=[...W].sort((a,b)=>{
+    const sa=ST[a.w]||{srsLevel:0,srsNext:null};
+    const sb=ST[b.w]||{srsLevel:0,srsNext:null};
+    const aDue=isDueToday(a.w)?1:0;
+    const bDue=isDueToday(b.w)?1:0;
+    if(bDue!==aDue)return bDue-aDue;
+    return (sa.srsLevel||0)-(sb.srsLevel||0);
+  });
+  document.getElementById('d-wlist').innerHTML=sorted.map(x=>{
+    const s=ST[x.w]||{c:0,e:0,st:0,srsLevel:0,srsNext:null};
+    const tot=s.c+s.e;const pct=tot?Math.round(s.c/tot*100):0;
+    const c=TC[x.ty]||TC.d;
+    const lvl=Math.min(s.srsLevel||0,6);
+    const[bg,fg]=SRS_CLR[lvl];
+    const lb=SRS_LBL[lvl];
+    const due=isDueToday(x.w);
+    const dueDot=due&&lvl>0?'<span style="width:6px;height:6px;border-radius:50%;background:#E24B4A;display:inline-block;margin-right:4px;flex-shrink:0"></span>':'';
+    return`<div class="wli">${dueDot}<span class="wp" style="background:${c[0]};color:${c[1]}">${TL[x.ty]}</span><span class="wn">${x.w}</span><span class="ws">${s.c}/${tot}</span><div class="mb"><div class="mbf" style="width:${pct}%;background:#534AB7"></div></div><span class="wp" style="background:${bg};color:${fg}">${lb}</span></div>`;
+  }).join('');
+  
+  const last=SESS.slice(-7).reverse();
+  document.getElementById('d-sess').innerHTML=last.length?last.map(s=>{
+    const tot=s.c+s.e,pct=tot?Math.round(s.c/tot*100):0;
+    const barClr=pct>=70?'#639922':pct>=40?'#F5A623':'#E24B4A';
+    return`<div class="sr" style="flex-direction:column;gap:4px;align-items:stretch">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="color:#888;font-size:11px;flex-shrink:0">${s.d}</span>
+        <span style="flex:1;font-size:12px;color:#1a1a1a;font-weight:500">${s.w} palabras · ${s.t||''}</span>
+        <span style="font-size:12px;font-weight:600;color:${barClr}">${pct}%</span>
+      </div>
+      <div style="display:flex;gap:4px;align-items:center">
+        <div style="flex:1;height:3px;background:#e8e8e8;border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${barClr};border-radius:3px"></div></div>
+        <span style="font-size:11px;color:#27500A">${s.c}✓</span>
+        <span style="font-size:11px;color:#791F1F">${s.e}✗</span>
+      </div>
+    </div>`;
+  }).join(''):'<div style="font-size:13px;color:#888">No hay sesiones aún. ¡Empieza tu primera sesión!</div>';
+
+  // Actualizar repaso rápido del día anterior
+  rqUpdateDash();
+  // Actualizar repaso voluntario
+  volUpdateDash();
+}
+
+function startRecap(){
+  const pool=[...W].sort((a,b)=>{const sa=ST[a.w]||{e:0,st:0};const sb=ST[b.w]||{e:0,st:0};return sb.e-sa.e||sa.st-sb.st;}).slice(0,30);
+  RQ=shuffle(pool,Date.now());rco=0;rwr=0;
+  document.getElementById('rc-btn').style.display='none';
+  document.getElementById('rc-area').style.display='block';
+  document.getElementById('rc-done').style.display='none';
+  nextRc();
+}
+
+function nextRc(){
+  if(!RQ.length){
+    document.getElementById('rc-area').style.display='none';
+    document.getElementById('rc-done').style.display='block';
+    document.getElementById('rc-res').textContent=`Lo sabías: ${rco} · No lo sabías: ${rwr} de ${rco+rwr}`;
+    document.getElementById('rc-btn').style.display='block';
+    return;
+  }
+  const x=RQ.pop();const tot=rco+rwr+RQ.length+1;
+  document.getElementById('rc-prog').textContent=`${rco+rwr+1} / ${tot}`;
+  const bs=bdg(x.ty);
+  document.getElementById('rc-bdg').textContent=TL[x.ty];document.getElementById('rc-bdg').style.cssText=bs;
+  document.getElementById('rc-w').textContent=x.w;
+  document.getElementById('rc-tr').textContent=x.t;
+  document.getElementById('rc-gr').textContent=x.gram||'';
+  document.getElementById('rc-front').style.display='flex';
+  document.getElementById('rc-back').style.display='none';
+  document.getElementById('rc-btns').style.display='none';
+}
+
+function rcReveal(){document.getElementById('rc-front').style.display='none';document.getElementById('rc-back').style.display='block';document.getElementById('rc-btns').style.display='flex';}
+function markRc(ok){if(ok)rco++;else rwr++;nextRc();}
+
+function go(s){
+  ['dash','train','recap','words'].forEach(id=>{
+    const el=document.getElementById('sc-'+id);
+    if(el)el.style.display=id===s?'block':'none';
+    const b=document.querySelector(`.nb[onclick="go('${id}')"]`);
+    if(b)b.className='nb'+(id===s?' on':'');
+  });
+  if(s==='dash')rDash();
+  if(s==='train')prepToday();
+  if(s==='words'){renderWordsList();}
+}
+
+function getSeedWords(){
+  return [
+{w:"beherrschen",t:"dominar algo",ty:"v",gram:"+AKK",acl:"Como tener algo bajo control total.",exs:["Ich beherrsche Deutsch auf B2-Niveau.","Er beherrscht drei Sprachen fließend."],frases:[{es:"Domino el alemán a nivel B2."},{es:"Ella domina tres idiomas con fluidez."}]},
+{w:"bereuen",t:"arrepentirse de algo",ty:"v",gram:"+AKK",acl:"Como to regret. El objeto siempre en acusativo.",exs:["Ich bereue diese Entscheidung.","Das wirst du bereuen!"],frases:[{es:"Me arrepiento de esta decisión."},{es:"Te vas a arrepentir de eso."}]},
+{w:"sich begeistern für",t:"entusiasmarse por / apasionarse por",ty:"v",gram:"sich begeistern für (AKK) · sin sich: begeistern = entusiasmar a otros",acl:"TRUCO: CON sich = entusiasmarse TÚ por algo (für). SIN sich = entusiasmar A otra persona (AKK directo).",exs:["Das Konzert hat mich begeistert. → El concierto me entusiasmó.","Er begeistert sich für Astronomie. → Él se apasiona por la astronomía."],frases:[{es:"El concierto me entusiasmó totalmente."},{es:"Ella se apasiona por todo lo relacionado con el arte."}]},
+{w:"widersprechen (DAT)",t:"contradecir / llevar la contraria a",ty:"v",gram:"widersprechen + DAT · NUNCA acusativo · PP: widersprochen",acl:"TRAMPA CLÁSICA: en español 'contradecir A alguien' lleva acusativo, pero en alemán SIEMPRE dativo. Ich widerspreche DIR (no dich).",exs:["Ich widerspreche dir völlig. → Te contradigo totalmente.","Das widerspricht den Fakten. → Eso contradice los hechos."],frases:[{es:"Te contradigo totalmente en ese punto."},{es:"Sus declaraciones contradicen los hechos conocidos."}]},
+{w:"missverstehen",t:"malentender",ty:"v",gram:"+AKK · PP: missverstanden",acl:"El PP no lleva ge- porque es inseparable.",exs:["Du hast mich missverstanden.","Bitte missversteh mich nicht!"],frases:[{es:"Creo que me has malentendido."},{es:"Por favor, no me malinterpretes."}]},
+{w:"erraten",t:"adivinar / acertar",ty:"v",gram:"+AKK · PP: erraten",acl:"er- + raten = lograrlo adivinando.",exs:["Kannst du erraten, wo ich war?","Ich habe es auf Anhieb erraten."],frases:[{es:"¿Puedes adivinar dónde estuve?"},{es:"Lo adiviné a la primera."}]},
+{w:"betreffen",t:"afectar / concernir",ty:"v",gram:"+AKK · betreffend ≠ betroffen",acl:"TRUCO B2: betreffend=en cuestión. betroffen=afectado.",exs:["Das betrifft mich direkt.","Alle sind davon betroffen."],frases:[{es:"Eso me afecta directamente."},{es:"Todos los empleados se ven afectados."}]},
+{w:"sich äußern zu",t:"pronunciarse sobre / opinar sobre",ty:"v",gram:"sich äußern + zu (DAT) · también: sich äußern über (AKK)",acl:"Sacar hacia fuera lo que piensas SOBRE algo. SIEMPRE con 'zu' para el tema. Formal. ATENCIÓN: äußern con umlaut, no außern.",exs:["Ich möchte mich dazu äußern. → Me gustaría pronunciarme al respecto.","Der Minister äußerte sich zur Lage. → El ministro se pronunció sobre la situación."],frases:[{es:"Me gustaría opinar sobre este tema en concreto."},{es:"El ministro se pronunció sobre la situación económica."}]},
+{w:"sich entgegenkommen / jdm. entgegenkommen",t:"ceder mutuamente / hacer una concesión a alguien",ty:"v",gram:"mit sich (reziprok): ambos ceden · sin sich + DAT: hacer una concesión A alguien · separable",acl:"entgegen = al encuentro. CON sich (uns/euch/sich): ambos se mueven al encuentro = ceden mutuamente. SIN sich + DAT: tú te mueves hacia el otro = haces una concesión.",exs:["Wir kommen uns entgegen. → Cedemos mutuamente / llegamos a un punto medio.","Ich komme Ihnen entgegen und biete einen Rabatt. → Le hago una concesión y ofrezco un descuento."],frases:[{es:"Ambas partes cedieron y llegaron a un acuerdo."},{es:"Le haré una concesión y reduciré el precio."}]},
+{w:"sich herausstellen (als)",t:"resultar que / revelarse como",ty:"v",gram:"SIEMPRE con 'sich' · sujeto casi siempre 'es' · + dass o + als",acl:"heraus=hacia fuera + stellen=poner. Lo que sale a la luz. NUNCA olvidar 'sich'. Dos patrones: 'Es stellte sich heraus, dass...' o 'etw. stellt sich als X heraus'.",exs:["Es stellte sich heraus, dass er log. → Resultó que él había mentido.","Die Idee stellte sich als genial heraus. → La idea resultó ser genial."],frases:[{es:"Resultó que el problema era mucho más grave de lo que pensábamos."},{es:"Al final la solución más sencilla resultó ser la mejor."}]},
+{w:"sich erweisen als",t:"revelarse como / resultar ser",ty:"v",gram:"sich erweisen + als · PP: erwiesen · Präteritum irregular: erwies sich",acl:"Hay evidencia que lo confirma. SIEMPRE con 'als'. Pasado: erwies sich als (irregular). Más formal y con más evidencia que 'sich herausstellen'.",exs:["Er erwies sich als sehr zuverlässig. → Se reveló como muy fiable.","Die Methode erwies sich als erfolgreich. → El método resultó ser exitoso."],frases:[{es:"Al final se reveló como el candidato más adecuado."},{es:"La estrategia resultó ser mucho más eficaz de lo esperado."}]},
+{w:"gelten als",t:"ser considerado como / tener fama de",ty:"v",gram:"gelten als · gilt für (AKK) = ser válido para · es gilt + zu + Inf. = hay que",acl:"3 usos clave: (1) gilt als = se le considera [SIN coma, no 'dass']. (2) gilt für = es válido para. (3) es gilt zu = hay que. El más frecuente en B2: gilt als.",exs:["Er gilt als bester Arzt der Stadt. → Se le considera el mejor médico.","Es gilt, eine Lösung zu finden. → Hay que encontrar una solución."],frases:[{es:"Se le considera uno de los mejores escritores de su generación."},{es:"Esta norma es válida para todos los empleados sin excepción."}]},
+{w:"überzeugen / überzeugt sein von",t:"convencer / estar convencido de",ty:"v",gram:"jdn. überzeugen (AKK) · überzeugt sein + von (DAT) · PP: überzeugt",acl:"DOS usos: (1) überzeugen + AKK = convencer A alguien. (2) überzeugt sein + von = estar convencido DE algo. La preposición cambia el significado.",exs:["Er hat mich überzeugt. → Me ha convencido.","Ich bin von dieser Idee überzeugt. → Estoy convencido de esta idea."],frases:[{es:"Me ha convencido completamente con sus argumentos."},{es:"Estoy convencido de que esta es la mejor solución."}]},
+{w:"jdm. etw. vorwerfen",t:"reprocharle algo a alguien / acusar a alguien de algo",ty:"v",gram:"jdm. (DAT) etw. (AKK) vorwerfen · separable: wirft vor · PP: vorgeworfen",acl:"ESTRUCTURA DOBLE obligatoria: persona en DATIVO + cosa en ACUSATIVO. 'vor' va siempre al final. Er wirft MIR (DAT) Faulheit (AKK) vor.",exs:["Er wirft mir Faulheit vor. → Me reprocha la pereza.","Man wirft ihr Betrug vor. → Se le acusa de fraude."],frases:[{es:"Me reprocha constantemente que no me esfuerzo lo suficiente."},{es:"Le acusan de haber ocultado información importante."}]},
+{w:"verzichten auf",t:"renunciar a / prescindir de",ty:"v",gram:"verzichten + auf (AKK) · SIEMPRE auf, nunca otra preposición",acl:"REGLA DE ORO: verzichten SIEMPRE pide 'auf+AKK'. Como renunciar A algo en español — la preposición va pegada al concepto.",exs:["Ich verzichte auf Alkohol. → Renuncio al alcohol.","Sie musste auf Urlaub verzichten. → Tuvo que prescindir de las vacaciones."],frases:[{es:"He decidido renunciar al azúcar durante un mes."},{es:"Tuvo que prescindir de las vacaciones por el trabajo."}]},
+{w:"sich (DAT) etw. vornehmen",t:"proponerse algo / planear hacer algo",ty:"v",gram:"sich im DATIVO: mir/dir/sich/uns/euch/sich · + zu + Inf. o + AKK · separable: nimmt vor",acl:"TRAMPA: el 'sich' aquí es DATIVO, no acusativo. = 'proponerse A UNO MISMO'. Ich nehme MIR vor (no mich). Típico de propósitos y resoluciones.",exs:["Ich nehme mir vor, mehr Sport zu machen. → Me propongo hacer más deporte.","Was hast du dir vorgenommen? → ¿Qué te has propuesto?"],frases:[{es:"Me he propuesto aprender alemán a nivel B2 este año."},{es:"¿Qué te has propuesto conseguir este mes?"}]},
+{w:"nachgeben (DAT)",t:"ceder ante / rendirse ante",ty:"v",gram:"nachgeben + DAT · separable: gibt nach · PP: nachgegeben",acl:"'nach' al final. La persona ante quien cedes va en DATIVO. Ceder unilateralmente, tú solo. Distinto de sich entgegenkommen (mutuo).",exs:["Ich gebe nicht nach! → ¡No cedo!","Sie gab dem Druck nach. → Cedió ante la presión."],frases:[{es:"¡No pienso ceder ante esa presión!"},{es:"Al final cedió ante los argumentos de su jefa."}]},
+{w:"sich bemühen um",t:"esforzarse por / intentar conseguir",ty:"v",gram:"sich bemühen + um (AKK) · o + zu + Inf. · PP: bemüht",acl:"Mühe = esfuerzo. Be-müh-en = ponerse en modo esfuerzo. SIEMPRE con 'um' para el objetivo concreto o 'zu+Inf.' para una acción.",exs:["Ich bemühe mich um eine Lösung. → Me esfuerzo por encontrar una solución.","Er hat sich bemüht, pünktlich zu sein. → Se esforzó en ser puntual."],frases:[{es:"Me esfuerzo por mejorar mi alemán cada día."},{es:"Se esforzó mucho por conseguir ese puesto de trabajo."}]},
+{w:"der Mischmasch",t:"mezcla desordenada / batiburrillo",ty:"n",gram:"solo singular · coloquial · adj: totaler/völliger",acl:"De mischen. Coloquial. Adjetivo necesita declinación: ein totaler Mischmasch.",exs:["Das ist ein totaler Mischmasch!"],frases:[{es:"Esto es un batiburrillo total."},{es:"Su habitación es una mezcla de todo."}]},
+{w:"das Missverständnis",t:"malentendido",ty:"n",gram:"Pl: die Missverständnisse · neutro",acl:"miss- = mal-. Neutro → dieses Missverständnis (no diese).",exs:["Das war ein großes Missverständnis."],frases:[{es:"Fue un gran malentendido."},{es:"Tenemos que aclarar este malentendido."}]},
+{w:"der Gastgeber",t:"anfitrión",ty:"n",gram:"fem: die Gastgeberin",acl:"Gast=invitado + geber=el que da.",exs:["Der Gastgeber hat alles organisiert."],frases:[{es:"El anfitrión lo organizó todo."},{es:"Alemania es el país anfitrión del Mundial."}]},
+{w:"der Beschluss",t:"decisión formal / resolución",ty:"n",gram:"Pl: die Beschlüsse",acl:"Siempre institucional. Nunca personal.",exs:["Der Beschluss wurde einstimmig gefasst."],frases:[{es:"La resolución se adoptó por unanimidad."},{es:"La resolución entra en vigor mañana."}]},
+{w:"der Ansatz",t:"enfoque / planteamiento",ty:"n",gram:"Pl: die Ansätze",acl:"Cómo EMPIEZAS a abordar algo.",exs:["Das ist ein interessanter Ansatz."],frases:[{es:"Es un enfoque interesante."},{es:"Necesitamos un nuevo planteamiento."}]},
+{w:"der Mangel an",t:"la falta de / la escasez de",ty:"n",gram:"Mangel an + DAT · Pl: die Mangel · wegen des Mangels (Genitivo)",acl:"REGLA FIJA: Mangel SIEMPRE con 'an + Dativo'. Como 'falta DE' en español — la preposición es parte del concepto.",exs:["Es gibt einen Mangel an Fachkräften. → Hay escasez de trabajadores cualificados.","Der Mangel an Schlaf schadet der Gesundheit. → La falta de sueño daña la salud."],frases:[{es:"Hay escasez de trabajadores cualificados en ese sector."},{es:"La falta de comunicación fue la causa principal del problema."}]},
+{w:"die Fähigkeit",t:"la capacidad / la habilidad",ty:"n",gram:"Pl: die Fähigkeiten",acl:"fähig = capaz. -keit = -dad en español.",exs:["Sie hat die Fähigkeit, andere zu motivieren."],frases:[{es:"Tiene la capacidad de motivar a otros."},{es:"El pensamiento crítico es una habilidad importante."}]},
+{w:"die Auswirkung auf",t:"el efecto sobre / el impacto en",ty:"n",gram:"Auswirkung + auf (AKK) · Pl: die Auswirkungen · haben auf = tener efecto en",acl:"SIEMPRE con 'auf + AKK'. Aus+Wirkung = lo que actúa hacia fuera. El efecto que algo ejerce SOBRE otra cosa. Como 'impacto EN' en español.",exs:["Die Auswirkungen auf die Wirtschaft sind enorm. → Los efectos sobre la economía son enormes.","Das hat große Auswirkungen auf unser Leben. → Eso tiene un gran impacto en nuestra vida."],frases:[{es:"Los efectos del cambio climático sobre el medioambiente son perceptibles."},{es:"Eso tiene un impacto enorme en la salud de la población."}]},
+{w:"der Vorwurf",t:"el reproche / la acusación",ty:"n",gram:"Pl: die Vorwürfe",acl:"Sich Vorwürfe machen = sentirse culpable/reprocharse.",exs:["Sie machte ihm einen Vorwurf."],frases:[{es:"Le hizo un reproche."},{es:"Me reprocho a mí mismo."}]},
+{w:"die Überzeugung",t:"la convicción",ty:"n",gram:"aus Überzeugung = por convicción",acl:"De überzeugen. -ung = -ción en español.",exs:["Das ist meine feste Überzeugung."],frases:[{es:"Esa es mi firme convicción."},{es:"Actúa por convicción."}]},
+{w:"zuverlässig",t:"fiable / de confianza",ty:"a",gram:"contrario: unzuverlässig",acl:"De sich verlassen auf. En quien puedes fiarte.",exs:["Er ist ein zuverlässiger Mitarbeiter."],frases:[{es:"Es un empleado fiable."},{es:"Se puede confiar plenamente en ella."}]},
+{w:"ausführlich",t:"detallado / en profundidad",ty:"a",gram:"también adv.",acl:"aus-führlich = llevado a cabo completamente.",exs:["Er hat ausführlich erklärt."],frases:[{es:"Ha explicado detalladamente."},{es:"Fue un análisis exhaustivo."}]},
+{w:"vorläufig",t:"provisional / por ahora",ty:"a",gram:"sinónimo: vorübergehend",acl:"Lo provisional corre antes del resultado final.",exs:["Das ist eine vorläufige Entscheidung."],frases:[{es:"Es una decisión provisional."},{es:"De momento todo sigue igual."}]},
+{w:"grundsätzlich",t:"en principio / fundamental",ty:"a",gram:"también adv.",acl:"Grund=base + Satz=principio.",exs:["Ich bin grundsätzlich einverstanden."],frases:[{es:"En principio estoy de acuerdo."},{es:"Lo rechaza por principio."}]},
+{w:"mehrsprachig",t:"multilingüe",ty:"a",gram:"mehr- = multi",acl:"mehr- funciona como multi-.",exs:["Er ist mehrsprachig aufgewachsen."],frases:[{es:"Creció siendo multilingüe."},{es:"Los empleados multilingües están muy demandados."}]},
+{w:"betreffend",t:"relativo a / en cuestión",ty:"a",gram:"Part.I ≠ betroffen (Part.II = afectado)",acl:"betreffend=en cuestión. betroffen=afectado. ¡Diferencia clave B2!",exs:["Die betreffende Person wurde informiert."],frases:[{es:"La persona en cuestión fue informada."},{es:"Con respecto a su solicitud, necesitamos más datos."}]},
+{w:"endlich",t:"por fin",ty:"d",gram:"adv. temporal",acl:"Cuando llevas tiempo esperando algo. ¡Por fin!",exs:["Endlich habe ich Urlaub!"],frases:[{es:"¡Por fin tengo vacaciones!"},{es:"Por fin entendí la gramática alemana."}]},
+{w:"anlässlich",t:"con motivo de (formal)",ty:"d",gram:"+ Genitivo",acl:"Solo textos formales. Siempre con genitivo.",exs:["Anlässlich des Events gibt es Rabatte."],frases:[{es:"Con motivo del evento hay descuentos."},{es:"Con motivo de su cumpleaños hubo una fiesta."}]},
+{w:"außerdem",t:"además",ty:"d",gram:"invierte sujeto-verbo al inicio",acl:"Si va al inicio: Außerdem IST das... (verbo en 2ª posición).",exs:["Außerdem ist das sehr praktisch."],frases:[{es:"Además, eso es muy práctico."},{es:"Además habla tres idiomas."}]},
+{w:"allerdings",t:"sin embargo (suave) / eso sí",ty:"d",gram:"matiza, no niega totalmente",acl:"Más suave que dennoch. Como 'eso sí' en español.",exs:["Das ist gut, allerdings teuer."],frases:[{es:"Eso está bien, eso sí, es caro."},{es:"Es interesante, aunque muy difícil."}]},
+{w:"deshalb",t:"por eso",ty:"d",gram:"causal · invierte sujeto-verbo al inicio",acl:"Causa → efecto. Deshalb KOMMT er... (verbo en 2ª posición).",exs:["Ich bin krank, deshalb bleibe ich zu Hause."],frases:[{es:"Estoy enfermo, por eso me quedo en casa."},{es:"No tenía tiempo, por eso no llamé."}]},
+{w:"trotzdem",t:"a pesar de eso / de todas formas",ty:"d",gram:"adversativo · invierte sujeto-verbo al inicio",acl:"Contrasta con lo anterior. Como 'de todas formas'.",exs:["Es regnet, trotzdem gehe ich raus."],frases:[{es:"Llueve, de todas formas salgo."},{es:"Era difícil, a pesar de eso lo logré."}]},
+{w:"zunächst",t:"primero / en primer lugar",ty:"d",gram:"más formal que zuerst",acl:"Como 'en primer lugar'. Muy usado en presentaciones.",exs:["Zunächst möchte ich erklären…"],frases:[{es:"En primer lugar, me gustaría explicar el problema."},{es:"Primero hay que analizar la situación."}]},
+{w:"schließlich",t:"finalmente / al fin y al cabo",ty:"d",gram:"temporal y argumentativo",acl:"1) finalmente (tiempo). 2) al fin y al cabo (argumento).",exs:["Schließlich ist das wichtig."],frases:[{es:"Al fin y al cabo, eso es lo importante."},{es:"Finalmente encontraron una solución."}]},
+{w:"insgesamt",t:"en total / en conjunto",ty:"d",gram:"resume evaluación global",acl:"Cantidad=en total. Valoración=en general.",exs:["Insgesamt war es gut."],frases:[{es:"En general fue bueno."},{es:"En total gastamos 200 euros."}]},
+{w:"daher",t:"por lo tanto (formal)",ty:"d",gram:"más formal que deshalb",acl:"Como 'por lo tanto'. Más elegante que deshalb.",exs:["Es ist spät, daher gehe ich."],frases:[{es:"Es tarde, por lo tanto me voy."},{es:"No hay pruebas, por lo tanto no se puede confirmar."}]},
+{w:"dennoch",t:"sin embargo (formal) / no obstante",ty:"d",gram:"más fuerte que allerdings",acl:"Más formal que trotzdem. Como 'no obstante'.",exs:["Es war schwer, dennoch schaffte ich es."],frases:[{es:"Era difícil, sin embargo lo conseguí."},{es:"Los resultados son negativos, no obstante continuamos."}]},
+{w:"währenddessen",t:"mientras tanto",ty:"d",gram:"dos acciones simultáneas",acl:"Como 'mientras tanto' o 'entretanto'.",exs:["Ich lerne, währenddessen hört er Musik."],frases:[{es:"Estudio, mientras tanto él escucha música."},{es:"Ella cocinó, mientras tanto yo puse la mesa."}]},
+{w:"meistens",t:"la mayoría de las veces",ty:"d",gram:"más fuerte que oft",acl:"Hábito frecuente pero no siempre.",exs:["Meistens gehe ich ins Fitnessstudio."],frases:[{es:"La mayoría de las veces voy al gimnasio."},{es:"Normalmente estudio por la tarde."}]},
+{w:"plötzlich",t:"de repente",ty:"d",gram:"más neutro/literario que auf einmal",acl:"Como 'de repente'. Más literario que auf einmal.",exs:["Plötzlich hat es angefangen zu regnen."],frases:[{es:"De repente empezó a llover."},{es:"De golpe había desaparecido."}]},
+{w:"leider",t:"lamentablemente",ty:"d",gram:"posición flexible",acl:"Como 'lamentablemente'. Muy frecuente en alemán.",exs:["Leider habe ich keine Zeit."],frases:[{es:"Lamentablemente no tengo tiempo."},{es:"Desgraciadamente no pude asistir."}]},
+{w:"gleichzeitig",t:"al mismo tiempo",ty:"d",gram:"adv. y adj. · declinación: gleichzeitiger/gleichzeitige",acl:"gleich + Zeit = mismo tiempo. Como simultáneo.",exs:["Ich kann nicht gleichzeitig schreiben und zuhören."],frases:[{es:"No puedo escribir y escuchar al mismo tiempo."},{es:"Eso ocurrió simultáneamente en tres ciudades."}]},
+{w:"dadurch",t:"por eso / gracias a eso",ty:"d",gram:"con coma (une frases) / dadurch, dass...",acl:"3 usos: une frases (coma), dentro de frase (sin coma), dadurch dass = gracias a que.",exs:["Er hat viel gelernt, dadurch hat er bestanden."],frases:[{es:"Estudió mucho, por eso aprobó."},{es:"Gracias a que se levantó temprano, lo consiguió."}]},
+{w:"einerseits … andererseits",t:"por un lado… por otro lado",ty:"e",gram:"estructura doble · siempre van juntas",acl:"Siempre en pareja. Imprescindible en redacciones B2.",exs:["Einerseits ist es billig, andererseits schlecht."],frases:[{es:"Por un lado es barato, por otro lado es de mala calidad."},{es:"Por un lado me gusta viajar, por otro lado es cansado."}]},
+{w:"zum Beispiel",t:"por ejemplo",ty:"e",gram:"abrev. z.B.",acl:"Como por ejemplo. Se abrevia z.B. en textos.",exs:["Zum Beispiel kann man das so machen."],frases:[{es:"Por ejemplo, se puede hacer así."},{es:"Hay muchas opciones, por ejemplo el tren."}]},
+{w:"darüber hinaus",t:"además (formal)",ty:"e",gram:"más elevado que außerdem",acl:"Más formal que außerdem. Para textos académicos.",exs:["Darüber hinaus gibt es weitere Vorteile."],frases:[{es:"Además, hay otras ventajas."},{es:"Más allá de eso, el proyecto es sostenible."}]},
+{w:"im Allgemeinen",t:"en general",ty:"e",gram:"generaliza tendencias",acl:"insgesamt=suma total. im Allgemeinen=generalización.",exs:["Im Allgemeinen ist das sinnvoll."],frases:[{es:"En general eso tiene sentido."},{es:"Por lo general me levanto temprano."}]},
+{w:"meiner Meinung nach",t:"en mi opinión",ty:"e",gram:"SIEMPRE invierte sujeto-verbo",acl:"Estructura fija. Verbo en 2ª posición OBLIGATORIO.",exs:["Meiner Meinung nach ist das richtig."],frases:[{es:"En mi opinión eso es correcto."},{es:"En mi opinión deberíamos buscar otra solución."}]},
+{w:"auf einmal",t:"de repente / de una vez",ty:"e",gram:"dos significados según contexto",acl:"1) Temporal=de repente. 2) Cantidad=de una vez.",exs:["Auf einmal hat es geregnet."],frases:[{es:"De repente empezó a llover."},{es:"No puedo hacer todo de una vez."}]},
+{w:"etwas läuft schief",t:"algo sale mal",ty:"e",gram:"coloquial · schiefgehen = salir mal",acl:"schief=torcido. Como 'algo sale torcido'.",exs:["Bei ihm läuft immer etwas schief."],frases:[{es:"Con él siempre sale algo mal."},{es:"El plan salió mal."}]},
+{w:"in der Lage sein",t:"ser capaz de",ty:"e",gram:"in der Lage sein + zu + Inf.",acl:"Lage=posición. Más formal que können.",exs:["Ich bin nicht in der Lage, das zu entscheiden."],frases:[{es:"No estoy en condiciones de decidir eso."},{es:"Es capaz de resolver problemas."}]},
+{w:"zur Verfügung stehen / stellen",t:"estar disponible / poner a disposición",ty:"e",gram:"stehen=estar · stellen=poner",acl:"Imprescindible en emails formales.",exs:["Ich stehe Ihnen jederzeit zur Verfügung."],frases:[{es:"La habitación está a su disposición."},{es:"Estoy a su disposición en cualquier momento."}]},
+{w:"inwiefern",t:"en qué medida / hasta qué punto",ty:"d",gram:"adv. interrogativo/relativo · introduce pregunta indirecta",acl:"Como 'en qué medida' en español. Pregunta el grado o extensión de algo. Típico en debates y textos argumentativos B2.",exs:["Inwiefern beeinflusst das unsere Entscheidung? → ¿En qué medida influye eso en nuestra decisión?","Ich frage mich, inwiefern das relevant ist. → Me pregunto hasta qué punto eso es relevante."],frases:[{es:"Me pregunto hasta qué punto eso es relevante."},{es:"¿En qué medida influye el clima en nuestra salud?"}]},
+{w:"nichtsdestotrotz",t:"no obstante / a pesar de ello",ty:"d",gram:"adv. · muy formal · sinónimo: dennoch, trotzdem",acl:"Literalmente 'nada-de-eso-a pesar'. Como 'no obstante' en español formal. Más largo y enfático que 'dennoch'. Impresiona en redacciones B2.",exs:["Es war schwierig, nichtsdestotrotz haben wir es geschafft. → Era difícil, no obstante lo logramos.","Nichtsdestotrotz bleibt die Frage offen. → No obstante la pregunta sigue abierta."],frases:[{es:"Era difícil, no obstante lo logramos."},{es:"No obstante la pregunta sigue sin respuesta."}]},
+{w:"folglich",t:"en consecuencia / por consiguiente",ty:"d",gram:"adv. · formal · invierte sujeto-verbo al inicio",acl:"Como 'por consiguiente' en español formal. Más elegante que 'deshalb'. Muy usado en textos académicos.",exs:["Er hat nicht gelernt, folglich hat er nicht bestanden. → No estudió, en consecuencia no aprobó.","Folglich müssen wir eine neue Strategie entwickeln. → En consecuencia debemos desarrollar una nueva estrategia."],frases:[{es:"No estudió, en consecuencia no aprobó el examen."},{es:"En consecuencia debemos buscar otra solución."}]},
+{w:"unter der Voraussetzung, dass",t:"bajo la condición de que / siempre que",ty:"e",gram:"locución conjuntiva · + Nebensatz (verbo al final)",acl:"Como 'siempre que' o 'a condición de que' en español. Introduce una condición necesaria. Muy formal, típica de contratos y textos académicos.",exs:["Ich helfe dir, unter der Voraussetzung, dass du es selbst versuchst. → Te ayudo siempre que lo intentes tú primero.","Unter der Voraussetzung, dass alle zustimmen, können wir anfangen. → Siempre que todos estén de acuerdo podemos empezar."],frases:[{es:"Te ayudo siempre que lo intentes tú primero."},{es:"Podemos empezar bajo la condición de que todos estén de acuerdo."}]},
+{w:"in Anbetracht (+Genitiv)",t:"considerando / en vista de / habida cuenta de",ty:"e",gram:"preposición + Genitivo · muy formal",acl:"Como 'en vista de' en español formal. Siempre lleva genitivo. Típica de informes, discursos y textos oficiales.",exs:["In Anbetracht der Lage müssen wir handeln. → En vista de la situación debemos actuar.","In Anbetracht dieser Ergebnisse ist eine Änderung notwendig. → Considerando estos resultados es necesario un cambio."],frases:[{es:"En vista de la situación debemos actuar de inmediato."},{es:"Considerando estos resultados es necesario un cambio."}]},
+{w:"maßgeblich sein für",t:"ser determinante para / ser decisivo para",ty:"e",gram:"maßgeblich (adj/adv) · +AKK",acl:"'Maßstab'=escala/medida. 'Maßgeblich'=lo que da la medida, lo determinante. Como 'decisivo' en español.",exs:["Diese Entscheidung ist maßgeblich für unseren Erfolg. → Esta decisión es determinante para nuestro éxito.","Der Preis war maßgeblich für die Wahl. → El precio fue decisivo para la elección."],frases:[{es:"Esta decisión es determinante para nuestro éxito."},{es:"La calidad del trabajo fue decisiva para el resultado."}]},
+{w:"sich ergeben aus",t:"resultar de / derivarse de",ty:"v",gram:"sich ergeben aus + Dativ · PP: ergeben",acl:"'Ergeben'=rendirse/resultar. 'Sich ergeben aus'=lo que emerge de algo. Como 'derivarse de' en español. Muy usado en textos académicos.",exs:["Daraus ergibt sich, dass wir mehr Zeit brauchen. → De ello se deriva que necesitamos más tiempo.","Die Probleme ergaben sich aus dem Mangel an Kommunikation. → Los problemas resultaron de la falta de comunicación."],frases:[{es:"De ello se deriva que necesitamos más tiempo."},{es:"Los problemas resultaron de la falta de comunicación."}]},
+{w:"berücksichtigen",t:"tener en cuenta / considerar",ty:"v",gram:"+AKK · sinónimo: beachten, einbeziehen",acl:"'Rücksicht'=consideración. 'Be-rücksicht-igen'=tomar en consideración. Como 'tener en cuenta' en español. Muy frecuente en B2.",exs:["Wir müssen alle Faktoren berücksichtigen. → Debemos tener en cuenta todos los factores.","Dabei sollte man auch die Kosten berücksichtigen. → Al hacer esto también se deben considerar los costes."],frases:[{es:"Debemos tener en cuenta todos los factores."},{es:"Al tomar la decisión también hay que considerar los costes."}]},
+{w:"es lässt sich feststellen, dass",t:"se puede constatar que / cabe señalar que",ty:"e",gram:"estructura impersonal · lassen + sich + Infinitiv = se puede + inf.",acl:"'Feststellen'=constatar. 'Lässt sich feststellen'=se puede constatar. Estructura muy B2: lassen+sich equivale a 'se puede' en español.",exs:["Es lässt sich feststellen, dass die Zahlen gestiegen sind. → Se puede constatar que las cifras han subido.","Insgesamt lässt sich feststellen, dass das Projekt erfolgreich war. → En general cabe señalar que el proyecto fue exitoso."],frases:[{es:"Se puede constatar que las cifras han aumentado."},{es:"En general cabe señalar que el proyecto fue exitoso."}]},
+{w:"je nachdem",t:"dependiendo de / según",ty:"d",gram:"je nachdem (, ob/wie/was...) · puede ir solo o con subordinada",acl:"'Je'=según + 'nachdem'=después/según. Como 'dependiendo de' en español. Con 'ob/wie/was': 'je nachdem, ob...'=dependiendo de si...",exs:["Das kostet mehr oder weniger, je nachdem. → Cuesta más o menos dependiendo.","Je nachdem, wie viel Zeit du hast, kannst du mehr lernen. → Dependiendo de cuánto tiempo tengas puedes aprender más."],frases:[{es:"Dependiendo de cuánto tiempo tengas puedes aprender más."},{es:"El precio varía dependiendo de la calidad."}]}
+  ,
+{w:"die Erweiterung",t:"la ampliación / la extensión",ty:"n",gram:"Pl: die Erweiterungen · de erweitern (ampliar)",acl:"'Weit'=amplio. 'Er-weit-erung'=el acto de hacer más amplio. Como ampliación en español — la raíz de amplitud está en ambas.",exs:["Die Erweiterung des Projekts ist notwendig. → La ampliación del proyecto es necesaria.","Wir planen eine Erweiterung des Teams. → Planeamos una ampliación del equipo."],frases:[{es:"La ampliación del proyecto requiere más presupuesto."},{es:"Están planeando una extensión del contrato por dos años."}]},
+{w:"optimieren",t:"optimizar",ty:"v",gram:"+AKK · PP: optimiert",acl:"Idéntico al español optimizar. Mismo origen latino. Se usa igual y en los mismos contextos profesionales.",exs:["Wir müssen den Prozess optimieren. → Debemos optimizar el proceso.","Die Software wurde optimiert. → El software fue optimizado."],frases:[{es:"Debemos optimizar el proceso de producción urgentemente."},{es:"La empresa optimizó sus costes durante la crisis económica."}]},
+{w:"die Erstellung",t:"la elaboración / la creación",ty:"n",gram:"Pl: die Erstellungen · de erstellen (elaborar/crear)",acl:"'Erstellen'=crear algo concreto. Como elaboración en español para documentos, informes, planes. Siempre para resultados tangibles.",exs:["Die Erstellung des Berichts dauert drei Tage. → La elaboración del informe lleva tres días.","Die Erstellung einer Webseite ist komplex. → La creación de una web es compleja."],frases:[{es:"La elaboración del informe llevó más tiempo del previsto."},{es:"La creación de un plan detallado es imprescindible antes de empezar."}]},
+{w:"die Datenanalyse",t:"el análisis de datos",ty:"n",gram:"Pl: die Datenanalysen · Daten (datos) + Analyse (análisis)",acl:"Compuesto transparente: Daten=datos + Analyse=análisis. Igual que en español, solo junto y con mayúscula. Muy frecuente en contextos profesionales.",exs:["Die Datenanalyse zeigt klare Trends. → El análisis de datos muestra tendencias claras.","Ich bin spezialisiert auf Datenanalyse. → Estoy especializado en análisis de datos."],frases:[{es:"El análisis de datos reveló tendencias inesperadas en el mercado."},{es:"Sin un buen análisis de datos no se pueden tomar buenas decisiones."}]},
+{w:"die Leidenschaft",t:"la pasión",ty:"n",gram:"Pl: die Leidenschaften · leiden (sufrir) + -schaft (cualidad)",acl:"Etimología poética: Leiden=sufrimiento + -schaft=cualidad. La pasión como lo que te hace sufrir de intensidad. Como en español cuando decimos que algo nos apasiona.",exs:["Musik ist meine größte Leidenschaft. → La música es mi gran pasión.","Er arbeitet mit Leidenschaft. → Trabaja con pasión."],frases:[{es:"Desde niño, la fotografía ha sido su mayor pasión."},{es:"Cuando trabajas con pasión los resultados se notan."}]},
+{w:"die Ausdrucksweise",t:"la manera de expresarse / el modo de expresión",ty:"n",gram:"Pl: die Ausdrucksweisen · Ausdruck (expresión) + Weise (manera)",acl:"Ausdruck=expresión + Weise=manera. La manera de la expresión. Como forma de expresarse en español. Muy usado en crítica literaria y contextos académicos.",exs:["Seine Ausdrucksweise ist sehr präzise. → Su manera de expresarse es muy precisa.","Die Ausdrucksweise variiert je nach Kontext. → El modo de expresión varía según el contexto."],frases:[{es:"Su manera de expresarse es clara y muy elegante."},{es:"La forma de expresarse cambia bastante según el nivel de formalidad."}]},
+{w:"das Engagement",t:"el compromiso / la implicación / el empeño",ty:"n",gram:"solo singular · del francés · pronunciación alemana: Ongaschmo",acl:"Del francés engagement. En alemán describe dedicación y compromiso activo. Como implicación o empeño en español formal. Muy usado en contextos laborales y sociales.",exs:["Ihr Engagement im Projekt ist beeindruckend. → Su implicación en el proyecto es impresionante.","Das soziale Engagement ist sehr wichtig. → El compromiso social es muy importante."],frases:[{es:"Su implicación en el proyecto ha sido fundamental para el éxito."},{es:"El compromiso social de la empresa ha crecido considerablemente este año."}]},
+{w:"die Weiterentwicklung",t:"el desarrollo continuo / la evolución / el avance",ty:"n",gram:"Pl: die Weiterentwicklungen · weiter (más lejos) + Entwicklung (desarrollo)",acl:"Weiter=más adelante + Entwicklung=desarrollo. El desarrollo que sigue avanzando sin parar. Como desarrollo continuo o evolución en español profesional.",exs:["Die Weiterentwicklung der Technologie ist rasant. → El desarrollo de la tecnología es vertiginoso.","Wir investieren in die Weiterentwicklung unserer Mitarbeiter. → Invertimos en el desarrollo de nuestros empleados."],frases:[{es:"El desarrollo continuo de la inteligencia artificial cambia el mercado."},{es:"La empresa invierte en la formación y evolución de sus empleados."}]},
+{w:"unbefristet",t:"indefinido / sin límite de tiempo",ty:"a",gram:"contrario: befristet (temporal) · típico en contratos laborales",acl:"Un-=negación + befristet=limitado en el tiempo. Sin límite = indefinido. Como contrato indefinido en español laboral — exactamente el opuesto a temporal.",exs:["Er hat einen unbefristeten Vertrag. → Tiene un contrato indefinido.","Die Stelle ist unbefristet. → El puesto es indefinido."],frases:[{es:"Por fin consiguió un contrato indefinido después de dos años como temporal."},{es:"El puesto que ofrecen es a jornada completa e indefinido."}]}
+  ];
+}
+
+// ── TABS DE PALABRAS ──
+const TAB_ON='padding:8px 16px;font-size:13px;cursor:pointer;border:none;background:none;color:#3C3489;border-bottom:2px solid #3C3489;margin-bottom:-1px;font-family:inherit;font-weight:500';
+const TAB_OFF='padding:8px 16px;font-size:13px;cursor:pointer;border:none;background:none;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit';
+
+function wTab(t){
+  ['single','batch','import'].forEach(id=>{
+    const panel=document.getElementById('wpanel-'+id);
+    const btn=document.getElementById('wtab-'+id);
+    if(panel)panel.style.display=id===t?'block':'none';
+    if(btn)btn.style.cssText=id===t?TAB_ON:TAB_OFF;
+  });
+}
+
+// ── IMPORTAR DESDE CLAUDE ──
+function previewImport(){
+  const raw=document.getElementById('import-input').value.trim();
+  const err=document.getElementById('import-error');
+  const preview=document.getElementById('import-preview');
+  err.style.display='none';
+  preview.style.display='none';
+  document.getElementById('btn-import-save').style.display='none';
+  document.getElementById('import-ok').style.display='none';
+
+  if(!raw){err.textContent='Pega primero el JSON de Claude.';err.style.display='block';return;}
+
+  let parsed;
+  try{
+    parsed=JSON.parse(raw);
+    if(!Array.isArray(parsed))parsed=[parsed];
+  }catch(e){
+    err.textContent='El texto pegado no es un JSON válido. Asegúrate de copiar solo el bloque entre [ ] que te da Claude.';
+    err.style.display='block';
+    return;
+  }
+
+  // Filtrar duplicados
+  const existing=W.map(x=>x.w.toLowerCase());
+  const nuevas=parsed.filter(x=>x&&x.w&&x.t);
+  const sinDuplicados=nuevas.filter(x=>!existing.includes(x.w.toLowerCase()));
+  const duplicadas=nuevas.length-sinDuplicados.length;
+
+  if(!sinDuplicados.length){
+    err.textContent=`Todas las palabras (${duplicadas}) ya existen en tu lista.`;
+    err.style.display='block';
+    return;
+  }
+
+  // Mostrar preview
+  document.getElementById('import-preview-title').textContent=
+    `${sinDuplicados.length} palabras listas para añadir${duplicadas>0?' · '+duplicadas+' ya existían':''}`;
+  document.getElementById('import-preview-list').innerHTML=sinDuplicados.map(x=>{
+    const c=TC[x.ty]||TC.d;
+    return`<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fff;border-radius:7px">
+      <span style="font-size:13px;font-weight:600;color:#1a1a1a;flex:1">${x.w}</span>
+      <span style="font-size:10px;padding:1px 7px;border-radius:20px;background:${c[0]};color:${c[1]};font-weight:500">${TL[x.ty]||x.ty}</span>
+      <span style="font-size:12px;color:#555">${x.t}</span>
+    </div>`;
+  }).join('');
+  preview.style.display='block';
+  document.getElementById('btn-import-save').style.display='inline-block';
+  // Guardar temporalmente para el save
+  document.getElementById('btn-import-save').dataset.pending=JSON.stringify(sinDuplicados);
+}
+
+function saveImport(){
+  const btn=document.getElementById('btn-import-save');
+  let palabras;
+  try{palabras=JSON.parse(btn.dataset.pending);}catch(e){return;}
+
+  palabras.forEach(x=>{
+    if(!x.frases||!x.frases.length)x.frases=[{es:`Escribe una frase usando "${x.w}".`},{es:`Usa "${x.w}" en otro contexto diferente.`}];
+    if(!x.exs)x.exs=[];
+    W.push(x);
+    ST[x.w]={c:0,e:0,st:0,ls:null};
+  });
+  saveW();saveSt();
+
+  const n=palabras.length;
+  document.getElementById('import-input').value='';
+  document.getElementById('import-preview').style.display='none';
+  btn.style.display='none';
+  document.getElementById('import-ok').textContent=`✓ ${n} palabras añadidas. Total: ${W.length}`;
+  document.getElementById('import-ok').style.display='inline';
+  setTimeout(()=>document.getElementById('import-ok').style.display='none',3000);
+  rDash();renderWordsList();
+}
+
+// ── BATCH IMPORT ──
+let batchGenerated=[];
+
+function parseBatchInput(text){
+  // Limpiar y extraer palabras — una por línea, ignorar vacías y líneas muy cortas
+  return text.split('\n')
+    .map(l=>l.trim())
+    .filter(l=>l.length>1 && !l.startsWith('#') && !l.startsWith('//'))
+    .slice(0,100); // máximo 100 palabras por importación
+}
+
+async function processChunk(words){
+  // Procesar un lote de máx 10 palabras en una sola llamada
+  const existingWords=W.map(x=>x.w.toLowerCase());
+  const toProcess=words.filter(w=>{
+    const base=w.split(/[—\-:=·]/)[0].trim().toLowerCase();
+    return !existingWords.includes(base);
+  });
+  if(!toProcess.length)return[];
+
+  const prompt=`Eres un profesor de alemán B2. Genera fichas completas para estas palabras/expresiones alemanas. El estudiante tiene español como lengua materna.
+
+Lista de palabras:
+${toProcess.map((w,i)=>`${i+1}. ${w}`).join('\n')}
+
+Para cada una genera una ficha. Responde ÚNICAMENTE con este JSON exacto (array), sin markdown:
+[
+  {
+    "w": "palabra exacta en alemán",
+    "t": "traducción al español, concisa",
+    "ty": "v/n/a/d/e",
+    "gram": "nota gramatical clave: casos, plural, PP, separabilidad",
+    "acl": "truco 1-2 frases para recordar conectando con español",
+    "exs": ["ejemplo alemán → español", "ejemplo 2 alemán → español"],
+    "frases": [{"es": "frase en español nivel B2 para traducir al alemán"}, {"es": "segunda frase diferente"}]
+  }
+]
+
+Tipos: v=verbo, n=sustantivo, a=adjetivo, d=adverbio/conector, e=expresión fija`;
+
+  const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:3000,messages:[{role:'user',content:prompt}]})
+  });
+  const data=await resp.json();
+  const text=data.content.map(i=>i.text||'').join('');
+  const clean=text.replace(/```json|```/g,'').trim();
+  return JSON.parse(clean);
+}
+
+async function startBatchImport(){
+  const raw=document.getElementById('batch-input').value.trim();
+  if(!raw){document.getElementById('batch-error').textContent='Pega primero tu lista de palabras.';document.getElementById('batch-error').style.display='block';return;}
+
+  const lines=parseBatchInput(raw);
+  if(!lines.length){document.getElementById('batch-error').textContent='No se encontraron palabras válidas.';document.getElementById('batch-error').style.display='block';return;}
+
+  document.getElementById('batch-error').style.display='none';
+  document.getElementById('batch-results').style.display='none';
+  document.getElementById('btn-batch-save').style.display='none';
+  document.getElementById('batch-ok').style.display='none';
+  document.getElementById('btn-batch').disabled=true;
+  document.getElementById('batch-progress').style.display='block';
+
+  batchGenerated=[];
+  const chunkSize=10;
+  const total=lines.length;
+  let done=0;
+
+  // Procesar en lotes de 10
+  for(let i=0;i<lines.length;i+=chunkSize){
+    const chunk=lines.slice(i,i+chunkSize);
+    document.getElementById('batch-status').textContent=`Procesando lote ${Math.floor(i/chunkSize)+1} de ${Math.ceil(total/chunkSize)}...`;
+    document.getElementById('batch-counter').textContent=`${Math.min(i+chunkSize,total)} / ${total}`;
+    document.getElementById('batch-detail').textContent=chunk.slice(0,3).join(', ')+(chunk.length>3?'...':'');
+
+    try{
+      const results=await processChunk(chunk);
+      batchGenerated.push(...results);
+      done+=chunk.length;
+      document.getElementById('batch-bar').style.width=`${Math.round(done/total*100)}%`;
+    }catch(e){
+      // Si falla un lote, continuar con el siguiente
+      document.getElementById('batch-detail').textContent=`Lote ${Math.floor(i/chunkSize)+1} falló, continuando...`;
+    }
+
+    // Pausa entre lotes para no saturar
+    if(i+chunkSize<lines.length)await new Promise(r=>setTimeout(r,600));
+  }
+
+  document.getElementById('batch-status').textContent='¡Completado!';
+  document.getElementById('batch-bar').style.width='100%';
+  document.getElementById('btn-batch').disabled=false;
+
+  // Filtrar duplicados
+  const existing=W.map(x=>x.w.toLowerCase());
+  const nuevas=batchGenerated.filter(x=>x&&x.w&&!existing.includes(x.w.toLowerCase()));
+  const duplicadas=batchGenerated.length-nuevas.length;
+
+  // Mostrar resultados
+  document.getElementById('batch-results').style.display='block';
+  document.getElementById('batch-results-title').textContent=`${nuevas.length} palabras listas para guardar${duplicadas>0?` · ${duplicadas} ya existían y se omiten`:''}`;
+  document.getElementById('batch-results-list').innerHTML=nuevas.map((x,i)=>{
+    const c=TC[x.ty]||TC.d;
+    return`<div style="background:#f5f4f0;border-radius:8px;padding:9px 12px;display:flex;align-items:center;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#1a1a1a;flex:1">${x.w}</span>
+      <span style="font-size:11px;padding:1px 7px;border-radius:20px;background:${c[0]};color:${c[1]};font-weight:500">${TL[x.ty]||x.ty}</span>
+      <span style="font-size:12px;color:#555">${x.t}</span>
+    </div>`;
+  }).join('');
+
+  batchGenerated=nuevas;
+  if(nuevas.length>0){
+    document.getElementById('btn-batch-save').style.display='inline-block';
+  }
+}
+
+function saveBatchWords(){
+  if(!batchGenerated.length)return;
+  batchGenerated.forEach(x=>{
+    W.push({...x,exs:x.exs||[]});
+    ST[x.w]={c:0,e:0,st:0,ls:null};
+  });
+  saveW();saveSt();
+
+  const n=batchGenerated.length;
+  batchGenerated=[];
+  document.getElementById('btn-batch-save').style.display='none';
+  document.getElementById('batch-results').style.display='none';
+  document.getElementById('batch-progress').style.display='none';
+  document.getElementById('batch-input').value='';
+  document.getElementById('batch-ok').textContent=`✓ ${n} palabras guardadas correctamente`;
+  document.getElementById('batch-ok').style.display='inline';
+  setTimeout(()=>document.getElementById('batch-ok').style.display='none',3000);
+
+  rDash();renderWordsList();
+}
+
+// ── AÑADIR PALABRAS CON IA ──
+let generatedWord=null;
+
+async function generateWord(){
+  const w=document.getElementById('nw').value.trim();
+  if(!w){document.getElementById('gen-error').textContent='Escribe primero la palabra en alemán.';document.getElementById('gen-error').style.display='block';return;}
+
+  // Verificar duplicado
+  if(W.find(x=>x.w.toLowerCase()===w.toLowerCase())){
+    document.getElementById('gen-error').textContent=`"${w}" ya está en tu lista.`;
+    document.getElementById('gen-error').style.display='block';
+    return;
+  }
+
+  const ctx=document.getElementById('nctx').value.trim();
+  document.getElementById('gen-error').style.display='none';
+  document.getElementById('gen-preview').style.display='none';
+  document.getElementById('gen-loading').style.display='block';
+  document.getElementById('btn-generate').disabled=true;
+  document.getElementById('btn-save-word').style.display='none';
+  document.getElementById('btn-regen').style.display='none';
+  document.getElementById('add-ok').style.display='none';
+
+  const prompt=`Eres un profesor de alemán B2. Genera la ficha completa para esta palabra/expresión alemana.
+
+Palabra: "${w}"
+${ctx?`Contexto adicional del estudiante: "${ctx}"`:''}
+
+El estudiante aprende alemán y tiene español como lengua materna.
+
+Responde ÚNICAMENTE con este JSON exacto, sin markdown ni texto extra:
+{
+  "w": "la palabra exacta tal como la escribiste",
+  "t": "traducción al español, concisa y precisa",
+  "ty": "v/n/a/d/e (verbo/sustantivo/adjetivo/adverbio-conector/expresión)",
+  "gram": "nota gramatical clave: casos, plural, separabilidad, PP irregular, etc.",
+  "acl": "truco de 1-2 frases para recordarla conectándola con el español: etimología, semejanza, imagen mental",
+  "exs": ["ejemplo 1 en alemán con traducción → español", "ejemplo 2 en alemán → español"],
+  "frases": [
+    {"es": "frase en español que el estudiante debe traducir al alemán (nivel B2, que use la palabra)"},
+    {"es": "segunda frase en español, diferente situación"}
+  ]
+}`;
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})
+    });
+    const data=await resp.json();
+    const text=data.content.map(i=>i.text||'').join('');
+    const clean=text.replace(/```json|```/g,'').trim();
+    const result=JSON.parse(clean);
+    generatedWord=result;
+    document.getElementById('gen-loading').style.display='none';
+    showPreview(result);
+  }catch(e){
+    document.getElementById('gen-loading').style.display='none';
+    document.getElementById('gen-error').textContent='Error al conectar con la IA. Revisa tu conexión e intenta de nuevo.';
+    document.getElementById('gen-error').style.display='block';
+    document.getElementById('btn-generate').disabled=false;
+  }
+}
+
+function showPreview(r){
+  const c=TC[r.ty]||TC.d;
+  document.getElementById('prev-word').textContent=r.w;
+  document.getElementById('prev-badge').textContent=(TL[r.ty]||r.ty);
+  document.getElementById('prev-badge').style.cssText=`font-size:10px;padding:2px 8px;border-radius:20px;background:${c[0]};color:${c[1]};font-weight:500`;
+  document.getElementById('prev-trans').textContent=r.t;
+  document.getElementById('prev-gram').textContent=r.gram||'';
+  document.getElementById('prev-acl').textContent=r.acl||'';
+  document.getElementById('prev-frases').innerHTML=(r.frases||[]).map((f,i)=>`<div>${i+1}. ${f.es}</div>`).join('');
+  document.getElementById('gen-preview').style.display='block';
+  document.getElementById('btn-save-word').style.display='inline-block';
+  document.getElementById('btn-regen').style.display='inline-block';
+  document.getElementById('btn-generate').disabled=false;
+}
+
+function saveGeneratedWord(){
+  if(!generatedWord)return;
+  W.push({...generatedWord,exs:generatedWord.exs||[]});
+  ST[generatedWord.w]={c:0,e:0,st:0,ls:null};
+  saveW();saveSt();
+
+  // Reset form
+  document.getElementById('nw').value='';
+  document.getElementById('nctx').value='';
+  document.getElementById('gen-preview').style.display='none';
+  document.getElementById('btn-save-word').style.display='none';
+  document.getElementById('btn-regen').style.display='none';
+  document.getElementById('add-ok').style.display='inline';
+  setTimeout(()=>document.getElementById('add-ok').style.display='none',2500);
+  generatedWord=null;
+
+  rDash();renderWordsList();
+}
+
+function renderWordsList(){
+  const ty=document.getElementById('filter-ty').value;
+  const q=(document.getElementById('filter-search').value||'').toLowerCase();
+  const filtered=W.filter(x=>{
+    const matchTy=ty==='all'||x.ty===ty;
+    const matchQ=!q||x.w.toLowerCase().includes(q)||x.t.toLowerCase().includes(q);
+    return matchTy&&matchQ;
+  });
+  document.getElementById('words-count').textContent=W.length;
+  document.getElementById('all-words-list').innerHTML=filtered.map((x,i)=>{
+    const s=ST[x.w]||{c:0,e:0,st:0};
+    const tot=s.c+s.e;
+    const c=TC[x.ty]||TC.d;
+    const[bg,fg,lb]=s.st>=3?['#EAF3DE','#27500A','Aprendida']:s.e>=2?['#FCEBEB','#791F1F','Repasar']:s.ls?['#f5f4f0','#666','Vista']:['#f5f4f0','#666','Nueva'];
+    const idx=W.indexOf(x);
+    return`<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:12px 14px;margin-bottom:7px">
+      <div style="display:flex;align-items:flex-start;gap:8px">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:15px;font-weight:600;color:#1a1a1a">${x.w}</span>
+            <span style="font-size:10px;padding:1px 7px;border-radius:20px;background:${c[0]};color:${c[1]};font-weight:500">${TL[x.ty]}</span>
+            <span style="font-size:10px;padding:1px 7px;border-radius:20px;background:${bg};color:${fg};margin-left:auto">${lb}</span>
+          </div>
+          <div style="font-size:13px;color:#555;margin-bottom:2px">${x.t}</div>
+          ${x.gram?`<div style="font-size:11px;color:#888;font-style:italic">${x.gram}</div>`:''}
+          <div style="font-size:11px;color:#aaa;margin-top:4px">${s.c}/${tot} correctas</div>
+        </div>
+        <button onclick="deleteWord(${idx})" style="background:none;border:none;cursor:pointer;color:#ddd;font-size:18px;padding:0 4px;line-height:1" title="Eliminar">×</button>
+      </div>
+    </div>`;
+  }).join('')||'<div style="font-size:13px;color:#888;text-align:center;padding:2rem">No hay palabras con ese filtro.</div>';
+}
+
+function deleteWord(idx){
+  if(!confirm(`¿Eliminar "${W[idx].w}"?`))return;
+  const w=W[idx].w;
+  W.splice(idx,1);
+  delete ST[w];
+  saveW();saveSt();
+  rDash();renderWordsList();
+}
+
+init();
+</script>
+</body>
+</html>
